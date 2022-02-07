@@ -2,11 +2,11 @@ import { adminAndOwnerOnly, adminOwnerAndStaffOnly } from "@utils/auth-utils";
 import { ROUTES } from "@utils/routes";
 
 export const siteSettings = {
-  name: "PickBazar",
+  name: "PatraTillyDesigns",
   description: "",
   logo: {
-    url: "/logo.svg",
-    alt: "PickBazar",
+    url: "/PATRA TILLY LOGO.jpg",
+    alt: "PatraTillyDesigns",
     href: "/",
     width: 128,
     height: 40,
@@ -36,16 +36,16 @@ export const siteSettings = {
         label: "sidebar-nav-item-dashboard",
         icon: "DashboardIcon",
       },
-      {
-        href: ROUTES.SHOPS,
-        label: "sidebar-nav-item-shops",
-        icon: "ShopIcon",
-      },
-      {
-        href: ROUTES.ADMIN_MY_SHOPS,
-        label: "sidebar-nav-item-my-shops",
-        icon: "MyShopIcon",
-      },
+      // {
+      //   href: ROUTES.SHOPS,
+      //   label: "sidebar-nav-item-shops",
+      //   icon: "ShopIcon",
+      // },
+      // {
+      //   href: ROUTES.ADMIN_MY_SHOPS,
+      //   label: "sidebar-nav-item-my-shops",
+      //   icon: "MyShopIcon",
+      // },
       {
         href: ROUTES.PRODUCTS,
         label: "sidebar-nav-item-products",
@@ -56,11 +56,11 @@ export const siteSettings = {
         label: "sidebar-nav-item-attributes",
         icon: "AttributeIcon",
       },
-      {
-        href: ROUTES.GROUPS,
-        label: "sidebar-nav-item-groups",
-        icon: "TypesIcon",
-      },
+      // {
+      //   href: ROUTES.GROUPS,
+      //   label: "sidebar-nav-item-groups",
+      //   icon: "TypesIcon",
+      // },
       {
         href: ROUTES.CATEGORIES,
         label: "sidebar-nav-item-categories",

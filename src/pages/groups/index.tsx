@@ -58,7 +58,7 @@ export default function TypesPage() {
           </LinkButton>
         </div>
       </Card>
-      <TypeList types={data?.types} onOrder={setOrder} onSort={setColumn} />
+      {/* <TypeList types={data?.types} onOrder={setOrder} onSort={setColumn} /> */}
     </>
   );
 }
