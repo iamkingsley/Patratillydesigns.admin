@@ -44,7 +44,7 @@ export default function ProductsPage() {
     orderBy,
     sortedBy,
   });
-
+  console.log('/admin/products', data)
   if (loading) return <Loader text={t("common:text-loading")} />;
   if (error) return <ErrorMessage message={error.message} />;
 

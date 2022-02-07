@@ -15,6 +15,7 @@ export default function UpdateProductPage() {
     isLoading: loading,
     error,
   } = useProductQuery(query.productId as string);
+  console.log('/admin/productId/edit', data)
 
   if (loading) return <Loader text={t("common:text-loading")} />;
   if (error) return <ErrorMessage message={error?.message as string} />;
@@ -23,7 +24,8 @@ export default function UpdateProductPage() {
       <div className="py-5 sm:py-8 flex border-b border-dashed border-border-base">
         <h1 className="text-lg font-semibold text-heading">Edit Product</h1>
       </div>
-      <CreateOrUpdateProductForm initialValues={data} />
+      {/* <CreateOrUpdateProductForm initialValues={data} /> */}
+      <CreateOrUpdateProductForm initialValues={data._doc} />
     </>
   );
 }
