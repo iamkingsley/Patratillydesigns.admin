@@ -25,8 +25,10 @@ const Logo: React.FC<React.AnchorHTMLAttributes<{}>> = ({
         <Image
           src={logo?.original ?? siteSettings.logo.url}
           alt={siteTitle ?? siteSettings.logo.alt}
-          layout="fill"
-          objectFit="contain"
+          // layout="fill" (width and height instead)
+          width={logo.width}
+          height={logo.height}
+          // objectFit="contain"
           loading="eager"
         />
       </span>
