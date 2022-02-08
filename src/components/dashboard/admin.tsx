@@ -66,7 +66,7 @@ export default function Dashboard() {
   }
   return (
     <>
-      <div className="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-6">
+      <div className="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 mb-6">
         <div className="w-full ">
           <StickerCard
             titleTransKey="sticker-card-title-rev"
@@ -91,14 +91,14 @@ export default function Dashboard() {
             price={todays_revenue}
           />
         </div>
-        <div className="w-full ">
+        {/* <div className="w-full ">
           <StickerCard
             titleTransKey="sticker-card-title-total-shops"
             icon={<ShopIcon className="w-6" color="#1D4ED8" />}
             iconBgStyle={{ backgroundColor: "#93C5FD" }}
             price={data?.totalShops}
           />
-        </div>
+        </div> */}
       </div>
 
       <div className="w-full flex flex-wrap mb-6">

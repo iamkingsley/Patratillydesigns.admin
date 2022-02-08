@@ -9,8 +9,8 @@ const initialState = {
   currency: "USD",
   logo: {
     id: 1,
-    thumbnail: "/PATRA TILLY LOGO.jpg",
-    original: "/PATRA TILLY LOGO.jpg",
+    thumbnail: "/patra-tilly.jpg",
+    original: "/patra-tilly.jpg",
   },
 };
 

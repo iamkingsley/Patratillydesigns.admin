@@ -5,7 +5,7 @@ export const siteSettings = {
   name: "PatraTillyDesigns",
   description: "",
   logo: {
-    url: "/PATRA TILLY LOGO.jpg",
+    url: "/patra-tilly.jpg",
     alt: "PatraTillyDesigns",
     href: "/",
     width: 128,
@@ -91,21 +91,21 @@ export const siteSettings = {
         label: "sidebar-nav-item-coupons",
         icon: "CouponsIcon",
       },
-      {
-        href: ROUTES.TAXES,
-        label: "sidebar-nav-item-taxes",
-        icon: "TaxesIcon",
-      },
+      // {
+      //   href: ROUTES.TAXES,
+      //   label: "sidebar-nav-item-taxes",
+      //   icon: "TaxesIcon",
+      // },
       {
         href: ROUTES.SHIPPINGS,
         label: "sidebar-nav-item-shippings",
         icon: "ShippingsIcon",
       },
-      {
-        href: ROUTES.WITHDRAWS,
-        label: "sidebar-nav-item-withdraws",
-        icon: "WithdrawIcon",
-      },
+      // {
+      //   href: ROUTES.WITHDRAWS,
+      //   label: "sidebar-nav-item-withdraws",
+      //   icon: "WithdrawIcon",
+      // },
       {
         href: ROUTES.REFUNDS,
         label: "sidebar-nav-item-refunds",
