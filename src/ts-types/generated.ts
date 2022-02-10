@@ -289,7 +289,7 @@ export declare type Attribute = {
   name: Scalars["String"];
   slug: Scalars["String"];
   values: Array<AttributeValue>;
-  shop_id?: Maybe<Scalars["Int"]>;
+  shop_id?: Maybe<Scalars["String"]>;
 };
 export declare type VariationProductPivot = {
   price?: Maybe<Scalars["Float"]>;
@@ -363,7 +363,7 @@ export declare type AttributeValueInput = {
 };
 export declare type AttributeInput = {
   name: Scalars["String"];
-  shop_id: Scalars["Int"];
+  shop_id?: Scalars["String"];
   values: AttributeValueInput;
 };
 export declare type AttributeValueCreateInput = {
@@ -657,7 +657,7 @@ export declare type RegisterInput = {
   email: Scalars["String"];
   password: Scalars["String"];
   name: Scalars["String"];
-  shop_id?: Scalars["Int"];
+  shop_id?: Scalars["String"];
   permission: Permission;
 };
 
@@ -894,7 +894,7 @@ export declare type Withdraw = {
   id?: Maybe<Scalars["ID"]>;
   amount?: Maybe<Scalars["Float"]>;
   status?: Maybe<WithdrawStatus>;
-  shop_id?: Maybe<Scalars["Int"]>;
+  shop_id?: Maybe<Scalars["String"]>;
   shop?: Maybe<Shop>;
   payment_method?: Maybe<Scalars["String"]>;
   details?: Maybe<Scalars["String"]>;
@@ -916,7 +916,7 @@ export declare type WithdrawPaginator = {
 
 export declare type CreateWithdrawInput = {
   amount: Scalars["Float"];
-  shop_id: Scalars["Int"];
+  shop_id: Scalars["String"];
   payment_method?: Maybe<Scalars["String"]>;
   details?: Maybe<Scalars["String"]>;
   note?: Maybe<Scalars["String"]>;
@@ -926,7 +926,7 @@ export declare type AddStaffInput = {
   email: Scalars["String"];
   password: Scalars["String"];
   name: Scalars["String"];
-  shop_id: Scalars["Int"];
+  shop_id: Scalars["String"];
 };
 
 export declare type ShopSettings = {
