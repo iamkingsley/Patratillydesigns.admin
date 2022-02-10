@@ -27,6 +27,7 @@ import { getIcon } from "@utils/get-icon";
 import * as socialIcons from "@components/icons/social";
 import GooglePlacesAutocomplete from "@components/form/google-places-autocomplete";
 import omit from "lodash/omit";
+import RichTextEditor from "@components/ui/rich-text";
 
 type FormValues = {
   siteTitle: string;
@@ -54,6 +55,7 @@ type FormValues = {
     metaTags: string;
     canonicalUrl: string;
   };
+  aboutUs: string,
   google: {
     isEnable: boolean;
     tagManagerId: string;
@@ -149,6 +151,7 @@ export default function SettingsForm({
             (shipping: Shipping) => shipping.id == settings?.shippingClass
           )
         : "",
+      aboutUs: 'Hey! this is our about info',
     },
   });
 
@@ -368,6 +371,22 @@ export default function SettingsForm({
             variant="outline"
             className="mb-5"
             placeholder="one of summary, summary_large_image, app, or player"
+          />
+        </Card>
+      </div>
+
+      <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
+        <Description
+          title={t("form:form-title-about")}
+          details={t("form:form-about-info-help-text")}
+          className="w-full px-0 sm:pr-4 md:pr-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8"
+        />
+
+        <Card className="w-full sm:w-8/12 md:w-2/3">
+          <RichTextEditor 
+            name="aboutUs" 
+            control={control} 
+            rules={{required: true}}
           />
         </Card>
       </div>
