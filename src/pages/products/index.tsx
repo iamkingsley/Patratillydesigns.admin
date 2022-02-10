@@ -14,6 +14,8 @@ import CategoryTypeFilter from "@components/product/category-type-filter";
 import cn from "classnames";
 import { ArrowDown } from "@components/icons/arrow-down";
 import { ArrowUp } from "@components/icons/arrow-up";
+import LinkButton from "@components/ui/link-button";
+import { ROUTES } from "@utils/routes";
 
 export default function ProductsPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -99,6 +101,17 @@ export default function ProductsPage() {
               }}
             />
           </div>
+          {/* <LinkButton
+              href={`${ROUTES.PRODUCTS}/create`}
+              className="h-12 md:ms-6 w-full md:w-auto"
+            >
+              <span className="block md:hidden xl:block">
+                + {t("form:form-title-create-product")}
+              </span>
+              <span className="hidden md:block xl:hidden">
+                + {t("form:button-label-add")}
+              </span>
+            </LinkButton> */}
         </div>
       </Card>
       <ProductList

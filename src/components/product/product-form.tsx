@@ -212,7 +212,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
       type_id: type?.id,
       ...(initialValues
         ? { shop_id: initialValues?.shop_id }
-        : { shop_id: Number(shopId) }),
+        : { shop_id: shopId }),
       price: Number(values.price),
       sale_price: values.sale_price ? Number(values.sale_price) : null,
       categories: values?.categories?.map(({ id }: any) => id),
