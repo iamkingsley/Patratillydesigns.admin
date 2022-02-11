@@ -53,13 +53,13 @@ const CategoryList = ({
   });
 
   const columns = [
-    {
-      title: t("table:table-item-id"),
-      dataIndex: "id",
-      key: "id",
-      align: "center",
-      width: 60,
-    },
+    // {
+    //   title: t("table:table-item-id"),
+    //   dataIndex: "id",
+    //   key: "id",
+    //   align: "center",
+    //   width: 60,
+    // },
     {
       title: (
         <TitleWithSort
@@ -123,22 +123,22 @@ const CategoryList = ({
         );
       },
     },
-    {
-      title: t("table:table-item-slug"),
-      dataIndex: "slug",
-      key: "slug",
-      align: "center",
-      ellipsis: true,
-      width: 150,
-      render: (slug: any) => (
-        <div
-          className="whitespace-nowrap truncate overflow-hidden"
-          title={slug}
-        >
-          {slug}
-        </div>
-      ),
-    },
+    // {
+    //   title: t("table:table-item-slug"),
+    //   dataIndex: "slug",
+    //   key: "slug",
+    //   align: "center",
+    //   ellipsis: true,
+    //   width: 150,
+    //   render: (slug: any) => (
+    //     <div
+    //       className="whitespace-nowrap truncate overflow-hidden"
+    //       title={slug}
+    //     >
+    //       {slug}
+    //     </div>
+    //   ),
+    // },
     {
       title: t("table:table-item-group"),
       dataIndex: "type",
@@ -156,14 +156,14 @@ const CategoryList = ({
     },
     {
       title: t("table:table-item-actions"),
-      dataIndex: "id",
+      dataIndex: "slug",
       key: "actions",
       align: "center",
       width: 90,
-      render: (id: string) => (
+      render: (slug: string) => (
         <ActionButtons
-          id={id}
-          editUrl={`${ROUTES.CATEGORIES}/edit/${id}`}
+          id={slug}
+          editUrl={`${ROUTES.CATEGORIES}/edit/${slug}`}
           deleteModalView="DELETE_CATEGORY"
         />
       ),
@@ -178,7 +178,7 @@ const CategoryList = ({
           columns={columns}
           emptyText={t("table:empty-table-data")}
           data={data}
-          rowKey="id"
+          rowKey="slug"
           scroll={{ x: 1000 }}
           expandable={{
             expandedRowRender: () => "",

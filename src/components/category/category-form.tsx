@@ -164,22 +164,24 @@ export default function CreateOrUpdateCategoriesForm({
     useUpdateCategoryMutation();
 
   const onSubmit = async (values: FormValues) => {
+    console.log('values: ', values)
     const input = {
       name: values.name,
       details: values.details,
-      image: {
-        thumbnail: values?.image?.thumbnail,
-        original: values?.image?.original,
-        id: values?.image?.id,
-      },
+      // image: {
+      //   thumbnail: values?.image?.thumbnail,
+      //   original: values?.image?.original,
+      //   id: values?.image?.id,
+      // },
       icon: values.icon?.value || "",
-      parent: values.parent?.id,
-      type_id: values.type?.id,
+      parent: values.parent?._id,
+      parent_id: values.parent?.id,
+      type_id: values.type?._id,
     };
     if (initialValues) {
       updateCategory({
         variables: {
-          id: initialValues?.id,
+          id: initialValues?.slug,
           input: {
             ...input,
           },

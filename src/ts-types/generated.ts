@@ -262,7 +262,7 @@ export declare type Category = {
   id: Scalars["ID"];
   name: Scalars["String"];
   slug: Scalars["String"];
-  parent?: Maybe<Scalars["Int"]>;
+  parent?: Maybe<Category>;
   children: Array<Category>;
   details?: Maybe<Scalars["String"]>;
   image?: Maybe<Attachment>;
