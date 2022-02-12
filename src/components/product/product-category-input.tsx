@@ -27,7 +27,7 @@ const ProductCategoryInput = ({ control, setValue }: Props) => {
 
   const { data, isLoading: loading } = useCategoriesQuery({
     limit: 999,
-    type: type.slug,
+    type: type?.slug,
   });
 
   return (
@@ -38,7 +38,7 @@ const ProductCategoryInput = ({ control, setValue }: Props) => {
         isMulti
         control={control}
         getOptionLabel={(option: any) => option.name}
-        getOptionValue={(option: any) => option.id}
+        getOptionValue={(option: any) => option._id}
         // @ts-ignore
         options={data?.categories?.data}
         isLoading={loading}

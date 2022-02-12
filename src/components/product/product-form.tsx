@@ -215,18 +215,18 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
         : { shop_id: shopId }),
       price: Number(values.price),
       sale_price: values.sale_price ? Number(values.sale_price) : null,
-      categories: values?.categories?.map(({ id }: any) => id),
-      tags: values?.tags?.map(({ id }: any) => id),
-      image: {
-        thumbnail: values?.image?.thumbnail,
-        original: values?.image?.original,
-        id: values?.image?.id,
-      },
-      gallery: values.gallery?.map(({ thumbnail, original, id }: any) => ({
-        thumbnail,
-        original,
-        id,
-      })),
+      categories: values?.categories?.map(({ _id }: any) => _id),
+      tags: values?.tags?.map(({ _id }: any) => _id),
+      // image: {
+      //   thumbnail: values?.image?.thumbnail,
+      //   original: values?.image?.original,
+      //   id: values?.image?.id,
+      // },
+      // gallery: values.gallery?.map(({ thumbnail, original, id }: any) => ({
+      //   thumbnail,
+      //   original,
+      //   id,
+      // })),
       ...(productTypeValue?.value === ProductType.Variable && {
         variations: values?.variations?.flatMap(({ value }: any) =>
           value?.map(({ id }: any) => ({ attribute_value_id: id }))
@@ -261,12 +261,12 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
           }
         : {
             variations: [],
-            variation_options: {
-              upsert: [],
-              delete: initialValues?.variation_options?.map(
-                (variation) => variation?.id
-              ),
-            },
+            // variation_options: {
+            //   upsert: [],
+            //   delete: initialValues?.variation_options?.map(
+            //     (variation) => variation?.id
+            //   ),
+            // },
           }),
       ...calculateMaxMinPrice(values?.variation_options),
     };
@@ -275,7 +275,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
       updateProduct(
         {
           variables: {
-            id: initialValues.id,
+            id: initialValues.slug,
             input: inputValues,
           },
         },

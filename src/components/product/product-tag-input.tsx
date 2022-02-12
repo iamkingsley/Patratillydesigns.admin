@@ -27,7 +27,7 @@ const ProductTagInput = ({ control, setValue }: Props) => {
 
   const { data, isLoading: loading } = useTagsQuery({
     limit: 999,
-    type: type.slug,
+    type: type?.slug,
   });
 
   return (
