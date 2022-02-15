@@ -176,7 +176,7 @@ export default function CreateOrUpdateCategoriesForm({
       icon: values.icon?.value || "",
       parent: values.parent?._id,
       parent_id: values.parent?.id,
-      type_id: values.type?._id,
+      type_id: values.type?.id,
     };
     if (initialValues) {
       updateCategory({
