@@ -111,11 +111,12 @@ export default function CreateOrUpdateTagForm({ initialValues }: IProps) {
     const input = {
       name: values.name,
       details: values.details,
-      image: {
-        thumbnail: values?.image?.thumbnail,
-        original: values?.image?.original,
-        id: values?.image?.id,
-      },
+      image: values?.image ?
+        {
+          thumbnail: values?.image?.thumbnail,
+          original: values?.image?.original,
+          id: values?.image?.id,
+        } : undefined,
       icon: values.icon?.value ?? "",
       type_id: values.type?.id,
     };

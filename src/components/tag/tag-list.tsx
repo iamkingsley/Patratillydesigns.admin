@@ -49,13 +49,13 @@ const TagList = ({ tags, onPagination, onSort, onOrder }: IProps) => {
   });
 
   const columns = [
-    {
-      title: t("table:table-item-id"),
-      dataIndex: "id",
-      key: "id",
-      align: "center",
-      width: 60,
-    },
+    // {
+    //   title: t("table:table-item-id"),
+    //   dataIndex: "id",
+    //   key: "id",
+    //   align: "center",
+    //   width: 60,
+    // },
     {
       title: (
         <TitleWithSort
@@ -72,28 +72,27 @@ const TagList = ({ tags, onPagination, onSort, onOrder }: IProps) => {
       align: alignLeft,
       onHeaderCell: () => onHeaderClick("name"),
     },
-    {
-      title: t("table:table-item-image"),
-      dataIndex: "image",
-      key: "image",
-      align: "center",
+    // {
+    //   title: t("table:table-item-image"),
+    //   dataIndex: "image",
+    //   key: "image",
+    //   align: "center",
 
-      render: (image: any, { name }: { name: string }) => {
-        if (!image?.thumbnail) return null;
+    //   render: (image: any, { name }: { name: string }) => {
+    //     if (!image?.thumbnail) return null;
 
-        return (
-          <Image
-            src={image?.thumbnail ?? "/"}
-            alt={name}
-            layout="fixed"
-            width={40}
-            height={40}
-            className="rounded overflow-hidden"
-          />
-        );
-      },
-    },
-
+    //     return (
+    //       <Image
+    //         src={image?.thumbnail ?? "/"}
+    //         alt={name}
+    //         layout="fixed"
+    //         width={40}
+    //         height={40}
+    //         className="rounded overflow-hidden"
+    //       />
+    //     );
+    //   },
+    // },
     {
       title: t("table:table-item-icon"),
       dataIndex: "icon",
@@ -119,21 +118,21 @@ const TagList = ({ tags, onPagination, onSort, onOrder }: IProps) => {
       align: "center",
       ellipsis: true,
     },
-    {
-      title: t("table:table-item-group"),
-      dataIndex: "type",
-      key: "type",
-      align: alignLeft,
-      width: 120,
-      render: (type: any) => (
-        <div
-          className="whitespace-nowrap truncate overflow-hidden"
-          title={type?.name}
-        >
-          {type?.name}
-        </div>
-      ),
-    },
+    // {
+    //   title: t("table:table-item-group"),
+    //   dataIndex: "type",
+    //   key: "type",
+    //   align: alignLeft,
+    //   width: 120,
+    //   render: (type: any) => (
+    //     <div
+    //       className="whitespace-nowrap truncate overflow-hidden"
+    //       title={type?.name}
+    //     >
+    //       {type?.name}
+    //     </div>
+    //   ),
+    // },
     {
       title: t("table:table-item-actions"),
       dataIndex: "id",
