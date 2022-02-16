@@ -168,11 +168,11 @@ export default function CreateOrUpdateCategoriesForm({
     const input = {
       name: values.name,
       details: values.details,
-      // image: {
-      //   thumbnail: values?.image?.thumbnail,
-      //   original: values?.image?.original,
-      //   id: values?.image?.id,
-      // },
+      image: {
+        thumbnail: values?.image?.thumbnail,
+        original: values?.image?.original,
+        id: values?.image?.id,
+      },
       icon: values.icon?.value || "",
       parent: values.parent?._id,
       parent_id: values.parent?.id,

@@ -394,6 +394,7 @@ export declare type AttachmentInput = {
   thumbnail?: Maybe<Scalars["String"]>;
   original?: Maybe<Scalars["String"]>;
   id?: Maybe<Scalars["ID"]>;
+  _id?: Maybe<Scalars["ID"]>;
 };
 export declare type UpdateCategory = {
   name?: Maybe<Scalars["String"]>;

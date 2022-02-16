@@ -217,11 +217,12 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
       sale_price: values.sale_price ? Number(values.sale_price) : null,
       categories: values?.categories?.map(({ _id }: any) => _id),
       tags: values?.tags?.map(({ _id }: any) => _id),
-      // image: {
-      //   thumbnail: values?.image?.thumbnail,
-      //   original: values?.image?.original,
-      //   id: values?.image?.id,
-      // },
+      image: {
+        thumbnail: values?.image?.thumbnail,
+        original: values?.image?.original,
+        id: values?.image?.id,
+        _id: values?.image?._id,
+      },
       // gallery: values.gallery?.map(({ thumbnail, original, id }: any) => ({
       //   thumbnail,
       //   original,

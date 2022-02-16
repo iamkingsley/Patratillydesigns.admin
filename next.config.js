@@ -22,6 +22,7 @@ module.exports = withPWA({
       "pickbazar-sail.test",
       "pickbazarlaravel.s3.ap-southeast-1.amazonaws.com",
       "lh3.googleusercontent.com",
+      'res.cloudinary.com',
     ],
   },
   typescript: {
