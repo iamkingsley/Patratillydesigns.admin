@@ -40,13 +40,13 @@ const ShippingList = ({ shippings, onSort, onOrder }: IProps) => {
   });
 
   const columns = [
-    {
-      title: t("table:table-item-id"),
-      dataIndex: "id",
-      key: "id",
-      align: "center",
-      width: 62,
-    },
+    // {
+    //   title: t("table:table-item-id"),
+    //   dataIndex: "id",
+    //   key: "id",
+    //   align: "center",
+    //   width: 62,
+    // },
     {
       title: (
         <TitleWithSort
@@ -86,7 +86,7 @@ const ShippingList = ({ shippings, onSort, onOrder }: IProps) => {
       key: "is_global",
       align: "center",
       render: (value: boolean) => (
-        <span className="capitalize">{value.toString()}</span>
+        <span className="capitalize">{value?.toString()}</span>
       ),
     },
     {

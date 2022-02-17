@@ -436,7 +436,7 @@ export enum ShippingType {
   /** Percentage */
   Percentage = "percentage",
   /** Free */
-  Free = "free_shipping",
+  Free = "free shipping",
 }
 
 export type Tax = {
