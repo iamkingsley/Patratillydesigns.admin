@@ -10,7 +10,8 @@ export interface ISettingsUpdateVariables {
   variables: { input: SettingsInput };
 }
 
-export const useUpdateSettingsMutation = () => {
+
+export const useCreateSettingsMutation = () => {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
   const { updateSettings } = useSettings();
@@ -18,6 +19,31 @@ export const useUpdateSettingsMutation = () => {
   return useMutation(
     ({ variables: { input } }: ISettingsUpdateVariables) =>
       Settings.create(API_ENDPOINTS.SETTINGS, input),
+    {
+      onSuccess: ({ data }) => {
+        updateSettings(data?.options);
+        toast.success(t("common:successfully-updated"));
+      },
+      // Always refetch after error or success:
+      onSettled: () => {
+        queryClient.invalidateQueries(API_ENDPOINTS.SETTINGS);
+      },
+    }
+  );
+};
+export const useUpdateSettingsMutation = () => {
+  const { t } = useTranslation();
+  const queryClient = useQueryClient();
+  const { updateSettings } = useSettings();
+
+  return useMutation(({
+    variables: {
+      id,
+      input
+    } }: any) => {
+        console.log('variables: ', id, input);
+        return Settings.update(`${API_ENDPOINTS.SETTINGS}/${id}`, input)
+      },
     {
       onSuccess: ({ data }) => {
         updateSettings(data?.options);

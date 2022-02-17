@@ -6,7 +6,7 @@ export interface State {
 const initialState = {
   siteTitle: "PatraTillyDesigns",
   siteSubtitle: "",
-  currency: "USD",
+  currency: "GHS",
   logo: {
     id: 1,
     thumbnail: "/patra-tilly.jpg",
