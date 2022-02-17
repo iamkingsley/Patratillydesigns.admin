@@ -80,7 +80,7 @@ export default function InvoicePdf({ order }: { order: Order }) {
             {order.products.map((product, index) => {
               const { price } = usePrice({
                 // @ts-ignore
-                amount: parseFloat(product.pivot.subtotal),
+                amount: parseFloat(product?.pivot?.subtotal ?? product?.subtotal),
               });
               return (
                 <View style={styles.tbody} key={index}>

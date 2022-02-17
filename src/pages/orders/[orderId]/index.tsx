@@ -91,7 +91,7 @@ export default function OrderDetailsPage() {
       width: 70,
       render: (image: Attachment) => (
         <Image
-          src={image?.thumbnail ?? siteSettings.product.placeholder}
+          src={image ?? siteSettings.product.placeholder}
           alt="alt text"
           layout="fixed"
           width={50}
@@ -109,7 +109,7 @@ export default function OrderDetailsPage() {
           <span>{name}</span>
           <span className="mx-2">x</span>
           <span className="font-semibold text-heading">
-            {item.pivot.order_quantity}
+            {item?.pivot?.order_quantity ?? item.order_quantity}
           </span>
         </div>
       ),
@@ -121,7 +121,7 @@ export default function OrderDetailsPage() {
       align: alignRight,
       render: (_: any, item: any) => {
         const { price } = usePrice({
-          amount: parseFloat(item.pivot.subtotal),
+          amount: parseFloat(item?.pivot?.subtotal ?? item.subtotal),
         });
         return <span>{price}</span>;
       },
