@@ -2,11 +2,11 @@ import { adminAndOwnerOnly, adminOwnerAndStaffOnly } from "@utils/auth-utils";
 import { ROUTES } from "@utils/routes";
 
 export const siteSettings = {
-  name: "PatraTillyDesigns",
+  name: "Patra Tilly Designs",
   description: "",
   logo: {
     url: "/patra-tilly.jpg",
-    alt: "PatraTillyDesigns",
+    alt: "Patra Tilly Designs",
     href: "/",
     width: 128,
     height: 40,
@@ -28,7 +28,7 @@ export const siteSettings = {
       labelTransKey: "authorized-nav-item-logout",
     },
   ],
-  currencyCode: "USD",
+  currencyCode: "GHS",
   sidebarLinks: {
     admin: [
       {
@@ -106,11 +106,11 @@ export const siteSettings = {
       //   label: "sidebar-nav-item-withdraws",
       //   icon: "WithdrawIcon",
       // },
-      {
-        href: ROUTES.REFUNDS,
-        label: "sidebar-nav-item-refunds",
-        icon: "RefundsIcon",
-      },
+      // {
+      //   href: ROUTES.REFUNDS,
+      //   label: "sidebar-nav-item-refunds",
+      //   icon: "RefundsIcon",
+      // },
       {
         href: ROUTES.SETTINGS,
         label: "sidebar-nav-item-settings",

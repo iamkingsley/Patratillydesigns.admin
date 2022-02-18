@@ -1,6 +1,6 @@
 import { CartIconBig } from "@components/icons/cart-icon-bag";
 import { CoinIcon } from "@components/icons/coin-icon";
-import ColumnChart from "@components/widgets/column-chart";
+// import ColumnChart from "@components/widgets/column-chart";
 import StickerCard from "@components/widgets/sticker-card";
 import ErrorMessage from "@components/ui/error-message";
 import usePrice from "@utils/use-price";
@@ -13,7 +13,7 @@ import { useAnalyticsQuery } from "@data/analytics/use-analytics.query";
 import { useTranslation } from "next-i18next";
 import { useWithdrawsQuery } from "@data/withdraw/use-withdraws.query";
 import WithdrawTable from "@components/withdraw/withdraw-table";
-import { ShopIcon } from "@components/icons/sidebar";
+// import { ShopIcon } from "@components/icons/sidebar";
 import { DollarIcon } from "@components/icons/shops/dollar";
 
 export default function Dashboard() {
@@ -101,7 +101,7 @@ export default function Dashboard() {
         </div> */}
       </div>
 
-      <div className="w-full flex flex-wrap mb-6">
+      {/* <div className="w-full flex flex-wrap mb-6">
         <ColumnChart
           widgetTitle="Sale History"
           colors={["#03D3B5"]}
@@ -121,7 +121,7 @@ export default function Dashboard() {
             t("common:december"),
           ]}
         />
-      </div>
+      </div> */}
 
       <div className="w-full flex flex-wrap mb-6">
         <div className="w-full sm:w-1/2 xl:w-1/2 sm:px-3 sm:pl-0 mb-6 xl:mb-0">
