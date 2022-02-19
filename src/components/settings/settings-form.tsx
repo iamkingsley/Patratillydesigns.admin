@@ -302,22 +302,22 @@ export default function SettingsForm({
             variant="outline"
             className="mb-5"
           />
-          <Input
+          {/* <Input
             label={`${t("form:input-label-wallet-currency-ratio")}`}
             {...register("currencyToWalletRatio")}
             type="number"
             error={t(errors.currencyToWalletRatio?.message!)}
             variant="outline"
             className="mb-5"
-          />
-          <Input
+          /> */}
+          {/* <Input
             label={`${t("form:input-label-signup-points")}`}
             {...register("signupPoints")}
             type="number"
             error={t(errors.signupPoints?.message!)}
             variant="outline"
             className="mb-5"
-          />
+          /> */}
           <div className="mb-5">
             <Label>{t("form:input-label-tax-class")}</Label>
             <SelectInput
@@ -367,7 +367,7 @@ export default function SettingsForm({
             variant="outline"
             className="mb-5"
           />
-          <Input
+          {/* <Input
             label={t("form:input-label-canonical-url")}
             {...register("seo.canonicalUrl")}
             variant="outline"
@@ -388,7 +388,7 @@ export default function SettingsForm({
           <div className="mb-5">
             <Label>{t("form:input-label-og-image")}</Label>
             <FileInput name="seo.ogImage" control={control} multiple={false} />
-          </div>
+          </div> */}
           <Input
             label={t("form:input-label-twitter-handle")}
             {...register("seo.twitterHandle")}
@@ -417,7 +417,7 @@ export default function SettingsForm({
           <RichTextEditor 
             name="aboutUs" 
             control={control} 
-            rules={{required: true}}
+            // rules={{required: true}}
           />
         </Card>
       </div>

@@ -9,7 +9,6 @@ interface InputProps {
 }
 
 const RichTextEditor = ({ name, control, rules, ...rest}: InputProps) => {
-    const [value, setValue] = useState('');
     const [ReactQuill, setReactQuill] = useState();
 
     useEffect(() => {
@@ -21,19 +20,23 @@ const RichTextEditor = ({ name, control, rules, ...rest}: InputProps) => {
     }, [])
 
     if (ReactQuill) {
+        const Editor = React.forwardRef((props, ref) => {
+            return <ReactQuill.default
+                theme="snow" 
+                {...props}
+                ref={ref}
+            />
+        })
+
         return (
             <Controller
                 name={name}
                 control={control}
-                rules={{...rules, onChange: setValue}}
+                rules={rules}
                 {...rest}
                 render={({ field }) => 
-                    <ReactQuill.default
-                        {...field} 
-                        theme="snow" 
-                        value={value} 
-                        onChange={setValue}
-                    />}
+                    <Editor {...field} />
+                }
             />
         );
     }
