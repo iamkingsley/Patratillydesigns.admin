@@ -53,13 +53,13 @@ const CouponList = ({ coupons, onPagination, onSort, onOrder }: IProps) => {
   });
 
   const columns = [
-    {
-      title: t("table:table-item-id"),
-      dataIndex: "id",
-      key: "id",
-      align: "center",
-      width: 64,
-    },
+    // {
+    //   title: t("table:table-item-id"),
+    //   dataIndex: "id",
+    //   key: "id",
+    //   align: "center",
+    //   width: 64,
+    // },
     {
       title: t("table:table-item-banner"),
       dataIndex: "image",

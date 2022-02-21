@@ -246,7 +246,7 @@ export default function CreateOrUpdateCategoriesForm({
               isClearable={true}
             />
           </div>
-          <SelectTypes control={control} errors={errors} />
+          {/* <SelectTypes control={control} errors={errors} /> */}
           <SelectCategories control={control} setValue={setValue} />
         </Card>
       </div>

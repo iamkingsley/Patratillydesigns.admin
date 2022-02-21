@@ -45,7 +45,8 @@ type Variation = {
 type FormValues = {
   sku: string;
   name: string;
-  type: Type;
+  type_id: number,
+  // type: Type;
   product_type: ProductType;
   description: string;
   unit: string;
@@ -72,7 +73,7 @@ type FormValues = {
 const defaultValues = {
   sku: "",
   name: "",
-  type: "",
+  // type: "",
   productTypeValue: { name: "Simple Product", value: ProductType.Simple },
   description: "",
   unit: "",
@@ -164,6 +165,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
     defaultValues: initialValues
       ? cloneDeep({
           ...initialValues,
+          // type: initialValues?.type,
           isVariation:
             initialValues.variations?.length &&
             initialValues.variation_options?.length
@@ -192,9 +194,10 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
     useCreateProductMutation();
   const { mutate: updateProduct, isLoading: updating } =
     useUpdateProductMutation();
-
+  console.log('initial: ', initialValues)
   const onSubmit = async (values: FormValues) => {
     const { type } = values;
+    console.log('type', type)
     const inputValues: any = {
       description: values.description,
       height: values.height,
@@ -209,7 +212,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
           ? values?.quantity
           : calculateQuantity(values?.variation_options),
       product_type: values.productTypeValue?.value,
-      type_id: type?.id,
+      // type: Number(values?.type),
       ...(initialValues
         ? { shop_id: initialValues?.shop_id }
         : { shop_id: shopId }),
@@ -360,10 +363,10 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
             />
 
             <Card className="w-full sm:w-8/12 md:w-2/3">
-              <ProductGroupInput
+              {/* <ProductGroupInput
                 control={control}
                 error={t((errors?.type as any)?.message)}
-              />
+              /> */}
               <ProductCategoryInput control={control} setValue={setValue} />
               <ProductTagInput control={control} setValue={setValue} />
             </Card>

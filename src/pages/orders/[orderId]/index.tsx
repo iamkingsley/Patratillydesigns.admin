@@ -91,7 +91,7 @@ export default function OrderDetailsPage() {
       width: 70,
       render: (image: Attachment) => (
         <Image
-          src={image ?? siteSettings.product.placeholder}
+          src={image.thumbnail ?? siteSettings.product.placeholder}
           alt="alt text"
           layout="fixed"
           width={50}

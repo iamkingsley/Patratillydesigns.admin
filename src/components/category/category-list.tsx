@@ -139,21 +139,21 @@ const CategoryList = ({
     //     </div>
     //   ),
     // },
-    {
-      title: t("table:table-item-group"),
-      dataIndex: "type",
-      key: "type",
-      align: alignLeft,
-      width: 120,
-      render: (type: any) => (
-        <div
-          className="whitespace-nowrap truncate overflow-hidden"
-          title={type?.name}
-        >
-          {type?.name}
-        </div>
-      ),
-    },
+    // {
+    //   title: t("table:table-item-group"),
+    //   dataIndex: "type",
+    //   key: "type",
+    //   align: alignLeft,
+    //   width: 120,
+    //   render: (type: any) => (
+    //     <div
+    //       className="whitespace-nowrap truncate overflow-hidden"
+    //       title={type?.name}
+    //     >
+    //       {type?.name}
+    //     </div>
+    //   ),
+    // },
     {
       title: t("table:table-item-actions"),
       dataIndex: "slug",
