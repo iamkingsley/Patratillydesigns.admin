@@ -105,13 +105,13 @@ const RefundList = ({ refunds, onSort, onOrder, onPagination }: IProps) => {
       },
     },
     {
-      title: t("table:table-item-tracking-number"),
+      title: t("table:table-item-customer"),
       dataIndex: "order",
       key: "tracking_number",
       align: "center",
       width: 180,
       render: (_order: any) => (
-        <span className="whitespace-nowrap">{_order?.tracking_number}</span>
+        <span className="whitespace-nowrap">{_order?.customer?.name}</span>
       ),
     },
 

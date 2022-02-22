@@ -244,10 +244,10 @@ export default function RefundDetailsView({
         <div className="flex flex-col order-2 md:order-1">
           <p className="flex flex-col sm:flex-row sm:items-center text-sm text-sub-heading mb-5 sm:mb-3">
             <span className="font-semibold min-w-[180px] mb-2 sm:mb-0">
-              {t("table:table-item-tracking-number")}
+              {t("table:table-item-customer")}
             </span>
             <span className="hidden sm:block mx-2">: </span>
-            <span>{refund?.order?.tracking_number}</span>
+            <span>{refund?.order?.customer?.name}</span>
           </p>
           <p className="flex flex-col sm:flex-row sm:items-center text-sm text-sub-heading mb-5 sm:mb-3">
             <span className="font-semibold min-w-[180px] mb-2 sm:mb-0">
