@@ -658,6 +658,7 @@ export declare type RegisterInput = {
   email: Scalars["String"];
   password: Scalars["String"];
   name: Scalars["String"];
+  measurement: Maybe<Measurement>;
   shop_id?: Scalars["String"];
   permission: Permission;
 };
@@ -991,3 +992,21 @@ export declare type TypeSettingsInput = {
   layoutType?: Maybe<Scalars["String"]>;
   productCard?: Maybe<Scalars["String"]>;
 };
+
+export declare type Measurement = {
+  bustName?: Maybe<Scalars["String"]>;
+    waistName?: Maybe<Scalars["String"]>;
+    hipName?: Maybe<Scalars["String"]>;
+    shoulderWaistName?: Maybe<Scalars["String"]>;
+    shoulderNippleName?: Maybe<Scalars["String"]>;
+    shoulderUnderBustName?: Maybe<Scalars["String"]>;
+    blouseLengthName?: Maybe<Scalars["String"]>;
+    fullLengthName?: Maybe<Scalars["String"]>;
+    dressLegthName?: Maybe<Scalars["String"]>;
+    slitLengthName?: Maybe<Scalars["String"]>;
+    acrossBackName?: Maybe<Scalars["String"]>;
+    acrossChestName?: Maybe<Scalars["String"]>;
+    aroundArmName?: Maybe<Scalars["String"]>;
+    sleeveLengthName?: Maybe<Scalars["String"]>;
+    shirtLenghtName?: Maybe<Scalars["String"]>;
+}
