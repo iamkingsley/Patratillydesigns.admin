@@ -70,6 +70,8 @@
   "input-label-height": "高度",
   "input-label-length": "長度",
   "input-label-status": "地位",
+  "input-label-is-featured": "",
+  "input-label-is-featured-note": "",
   "input-label-published": "已發表",
   "input-label-draft": "草案",
   "input-label-select-icon": "選擇圖標",

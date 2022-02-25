@@ -9,6 +9,7 @@ import Radio from "@components/ui/radio/radio";
 import { useRouter } from "next/router";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FileInput from "@components/ui/file-input";
+import Checkbox from "@components/ui/checkbox/checkbox";
 import { productValidationSchema } from "./product-validation-schema";
 import groupBy from "lodash/groupBy";
 import ProductVariableForm from "./product-variable-form";
@@ -59,6 +60,7 @@ type FormValues = {
   tags: Tag[];
   in_stock: boolean;
   is_taxable: boolean;
+  is_featured: boolean;
   image: AttachmentInput;
   gallery: AttachmentInput[];
   status: ProductStatus;
@@ -86,6 +88,7 @@ const defaultValues = {
   tags: [],
   in_stock: true,
   is_taxable: false,
+  is_featured: false,
   image: [],
   gallery: [],
   status: ProductStatus.Publish,
@@ -220,6 +223,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
       sale_price: values.sale_price ? Number(values.sale_price) : null,
       categories: values?.categories?.map(({ _id }: any) => _id),
       tags: values?.tags?.map(({ _id }: any) => _id),
+      is_featured: values.is_featured,
       image: {
         thumbnail: values?.image?.thumbnail,
         original: values?.image?.original,
@@ -408,7 +412,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
                 className="mb-5"
               />
 
-              <div>
+              <div className="mb-5">
                 <Label>{t("form:input-label-status")}</Label>
                 <Radio
                   {...register("status")}
@@ -422,6 +426,16 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
                   id="draft"
                   label={t("form:input-label-draft")}
                   value="draft"
+                />
+              </div>
+
+              <div>
+                <Label>{t("form:input-label-is-featured")}</Label>
+                <Checkbox
+                  {...register("is_featured")}
+                  error={t(errors.is_featured?.message!)}
+                  label={t("form:input-label-is-featured-note")}
+                  className="mb-5"
                 />
               </div>
             </Card>

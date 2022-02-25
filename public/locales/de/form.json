@@ -70,6 +70,8 @@
   "input-label-height": "Höhe",
   "input-label-length": "Länge",
   "input-label-status": "Status",
+  "input-label-is-featured": "",
+  "input-label-is-featured-note": "",
   "input-label-published": "Veröffentlicht",
   "input-label-draft": "Entwurf",
   "input-label-select-icon": "Wählen Sie Symbol",

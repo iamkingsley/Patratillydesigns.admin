@@ -70,6 +70,8 @@
   "input-label-height": "ارتفاع",
   "input-label-length": "طول",
   "input-label-status": "حالة",
+  "input-label-is-featured": "",
+  "input-label-is-featured-note": "",
   "input-label-published": "نشرت",
   "input-label-draft": "مسودة",
   "input-label-select-icon": "تحديد الرمز",

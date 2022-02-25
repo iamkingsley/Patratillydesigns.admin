@@ -76,6 +76,8 @@
   "input-label-height": "Height",
   "input-label-length": "Length",
   "input-label-status": "Status",
+  "input-label-is-featured": "Featured Product?",
+  "input-label-is-featured-note": "Select to see this product in the slider",
   "input-label-published": "Published",
   "input-label-draft": "Draft",
   "input-label-select-icon": "Select Icon",

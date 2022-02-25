@@ -70,6 +70,8 @@
   "input-label-height": "Altura",
   "input-label-length": "Largo",
   "input-label-status": "Estado",
+  "input-label-is-featured": "",
+  "input-label-is-featured-note": "",
   "input-label-published": "Publicado",
   "input-label-draft": "Sequía",
   "input-label-select-icon": "Seleccionar icono",

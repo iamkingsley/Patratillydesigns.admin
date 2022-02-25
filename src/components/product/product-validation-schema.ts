@@ -64,6 +64,7 @@ export const productValidationSchema = yup.object().shape({
         .integer("form:error-quantity-must-integer")
         .required("form:error-quantity-required"),
       sku: yup.string().required("form:error-sku-required"),
+      is_featured: yup.boolean(),
     })
   ),
 });
