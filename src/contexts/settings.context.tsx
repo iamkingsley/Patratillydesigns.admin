@@ -4,13 +4,13 @@ export interface State {
 }
 
 const initialState = {
-  siteTitle: "PickBazar",
+  siteTitle: "PatraTillyDesigns",
   siteSubtitle: "",
-  currency: "USD",
+  currency: "GHS",
   logo: {
     id: 1,
-    thumbnail: "/logo.svg",
-    original: "/logo.svg",
+    thumbnail: "/patra-tilly.jpg",
+    original: "/patra-tilly.jpg",
   },
 };
 

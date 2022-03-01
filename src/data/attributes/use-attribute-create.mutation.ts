@@ -20,7 +20,8 @@ export const useCreateAttributeMutation = () => {
       Attribute.create(API_ENDPOINTS.ATTRIBUTES, input),
     {
       onSuccess: () => {
-        router.push(`/${router?.query?.shop}${ROUTES.ATTRIBUTES}`);
+        // router.push(`/${router?.query?.shop}${ROUTES.ATTRIBUTES}`);
+        router.push(ROUTES.ATTRIBUTES);
       },
       // Always refetch after error or success:
       onSettled: () => {

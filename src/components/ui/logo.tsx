@@ -18,15 +18,17 @@ const Logo: React.FC<React.AnchorHTMLAttributes<{}>> = ({
       <span
         className="overflow-hidden relative"
         style={{
-          width: siteSettings.logo.width,
-          height: siteSettings.logo.height,
+          width: siteSettings.logo?.width,
+          height: siteSettings.logo?.height,
         }}
       >
         <Image
-          src={logo?.original ?? siteSettings.logo.url}
-          alt={siteTitle ?? siteSettings.logo.alt}
+          src={logo?.original ?? siteSettings?.logo?.url}
+          alt={siteTitle ?? siteSettings?.logo.alt}
           layout="fill"
-          objectFit="contain"
+          // width={logo?.width}
+          // height={logo?.height}
+          // objectFit="contain"
           loading="eager"
         />
       </span>

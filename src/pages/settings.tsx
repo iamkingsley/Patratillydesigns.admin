@@ -16,7 +16,6 @@ export default function Settings() {
     useShippingClassesQuery();
 
   const { data, isLoading: loading, error } = useSettingsQuery();
-
   if (loading || shippingLoading || taxLoading)
     return <Loader text={t("common:text-loading")} />;
   if (error) return <ErrorMessage message={error.message} />;
@@ -28,7 +27,7 @@ export default function Settings() {
         </h1>
       </div>
       <SettingsForm
-        settings={data?.options}
+        data={data}
         taxClasses={taxData?.taxes}
         shippingClasses={ShippingData?.shippingClasses}
       />

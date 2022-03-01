@@ -1,5 +1,14 @@
 export const CURRENCY = [
   {
+    symbol: "GH₵",
+    name: "Ghanaian Cedi",
+    symbol_native: "₵",
+    decimal_digits: 2,
+    rounding: 0,
+    code: "GHS",
+    name_plural: "Ghanaian cedis",
+  },
+  {
     symbol: "$",
     name: "US Dollar",
     symbol_native: "$",
@@ -349,15 +358,6 @@ export const CURRENCY = [
     rounding: 0,
     code: "GEL",
     name_plural: "Georgian laris",
-  },
-  {
-    symbol: "GH₵",
-    name: "Ghanaian Cedi",
-    symbol_native: "GH₵",
-    decimal_digits: 2,
-    rounding: 0,
-    code: "GHS",
-    name_plural: "Ghanaian cedis",
   },
   {
     symbol: "FG",

@@ -9,6 +9,7 @@ import Radio from "@components/ui/radio/radio";
 import { useRouter } from "next/router";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FileInput from "@components/ui/file-input";
+import Checkbox from "@components/ui/checkbox/checkbox";
 import { productValidationSchema } from "./product-validation-schema";
 import groupBy from "lodash/groupBy";
 import ProductVariableForm from "./product-variable-form";
@@ -45,7 +46,8 @@ type Variation = {
 type FormValues = {
   sku: string;
   name: string;
-  type: Type;
+  type_id: number,
+  // type: Type;
   product_type: ProductType;
   description: string;
   unit: string;
@@ -58,6 +60,7 @@ type FormValues = {
   tags: Tag[];
   in_stock: boolean;
   is_taxable: boolean;
+  is_featured: boolean;
   image: AttachmentInput;
   gallery: AttachmentInput[];
   status: ProductStatus;
@@ -72,7 +75,7 @@ type FormValues = {
 const defaultValues = {
   sku: "",
   name: "",
-  type: "",
+  // type: "",
   productTypeValue: { name: "Simple Product", value: ProductType.Simple },
   description: "",
   unit: "",
@@ -85,6 +88,7 @@ const defaultValues = {
   tags: [],
   in_stock: true,
   is_taxable: false,
+  is_featured: false,
   image: [],
   gallery: [],
   status: ProductStatus.Publish,
@@ -164,6 +168,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
     defaultValues: initialValues
       ? cloneDeep({
           ...initialValues,
+          // type: initialValues?.type,
           isVariation:
             initialValues.variations?.length &&
             initialValues.variation_options?.length
@@ -192,9 +197,10 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
     useCreateProductMutation();
   const { mutate: updateProduct, isLoading: updating } =
     useUpdateProductMutation();
-
+  console.log('initial: ', initialValues)
   const onSubmit = async (values: FormValues) => {
     const { type } = values;
+    console.log('type', type)
     const inputValues: any = {
       description: values.description,
       height: values.height,
@@ -209,24 +215,26 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
           ? values?.quantity
           : calculateQuantity(values?.variation_options),
       product_type: values.productTypeValue?.value,
-      type_id: type?.id,
+      // type: Number(values?.type),
       ...(initialValues
         ? { shop_id: initialValues?.shop_id }
-        : { shop_id: Number(shopId) }),
+        : { shop_id: shopId }),
       price: Number(values.price),
       sale_price: values.sale_price ? Number(values.sale_price) : null,
-      categories: values?.categories?.map(({ id }: any) => id),
-      tags: values?.tags?.map(({ id }: any) => id),
+      categories: values?.categories?.map(({ _id }: any) => _id),
+      tags: values?.tags?.map(({ _id }: any) => _id),
+      is_featured: values.is_featured,
       image: {
         thumbnail: values?.image?.thumbnail,
         original: values?.image?.original,
         id: values?.image?.id,
+        _id: values?.image?._id,
       },
-      gallery: values.gallery?.map(({ thumbnail, original, id }: any) => ({
-        thumbnail,
-        original,
-        id,
-      })),
+      // gallery: values.gallery?.map(({ thumbnail, original, id }: any) => ({
+      //   thumbnail,
+      //   original,
+      //   id,
+      // })),
       ...(productTypeValue?.value === ProductType.Variable && {
         variations: values?.variations?.flatMap(({ value }: any) =>
           value?.map(({ id }: any) => ({ attribute_value_id: id }))
@@ -261,12 +269,12 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
           }
         : {
             variations: [],
-            variation_options: {
-              upsert: [],
-              delete: initialValues?.variation_options?.map(
-                (variation) => variation?.id
-              ),
-            },
+            // variation_options: {
+            //   upsert: [],
+            //   delete: initialValues?.variation_options?.map(
+            //     (variation) => variation?.id
+            //   ),
+            // },
           }),
       ...calculateMaxMinPrice(values?.variation_options),
     };
@@ -275,7 +283,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
       updateProduct(
         {
           variables: {
-            id: initialValues.id,
+            id: initialValues.slug,
             input: inputValues,
           },
         },
@@ -359,10 +367,10 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
             />
 
             <Card className="w-full sm:w-8/12 md:w-2/3">
-              <ProductGroupInput
+              {/* <ProductGroupInput
                 control={control}
                 error={t((errors?.type as any)?.message)}
-              />
+              /> */}
               <ProductCategoryInput control={control} setValue={setValue} />
               <ProductTagInput control={control} setValue={setValue} />
             </Card>
@@ -404,7 +412,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
                 className="mb-5"
               />
 
-              <div>
+              <div className="mb-5">
                 <Label>{t("form:input-label-status")}</Label>
                 <Radio
                   {...register("status")}
@@ -418,6 +426,16 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
                   id="draft"
                   label={t("form:input-label-draft")}
                   value="draft"
+                />
+              </div>
+
+              <div>
+                <Label>{t("form:input-label-is-featured")}</Label>
+                <Checkbox
+                  {...register("is_featured")}
+                  error={t(errors.is_featured?.message!)}
+                  label={t("form:input-label-is-featured-note")}
+                  className="mb-5"
                 />
               </div>
             </Card>

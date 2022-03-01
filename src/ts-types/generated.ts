@@ -262,7 +262,7 @@ export declare type Category = {
   id: Scalars["ID"];
   name: Scalars["String"];
   slug: Scalars["String"];
-  parent?: Maybe<Scalars["Int"]>;
+  parent?: Maybe<Category>;
   children: Array<Category>;
   details?: Maybe<Scalars["String"]>;
   image?: Maybe<Attachment>;
@@ -289,7 +289,7 @@ export declare type Attribute = {
   name: Scalars["String"];
   slug: Scalars["String"];
   values: Array<AttributeValue>;
-  shop_id?: Maybe<Scalars["Int"]>;
+  shop_id?: Maybe<Scalars["String"]>;
 };
 export declare type VariationProductPivot = {
   price?: Maybe<Scalars["Float"]>;
@@ -363,7 +363,7 @@ export declare type AttributeValueInput = {
 };
 export declare type AttributeInput = {
   name: Scalars["String"];
-  shop_id: Scalars["Int"];
+  shop_id?: Scalars["String"];
   values: AttributeValueInput;
 };
 export declare type AttributeValueCreateInput = {
@@ -394,6 +394,7 @@ export declare type AttachmentInput = {
   thumbnail?: Maybe<Scalars["String"]>;
   original?: Maybe<Scalars["String"]>;
   id?: Maybe<Scalars["ID"]>;
+  _id?: Maybe<Scalars["ID"]>;
 };
 export declare type UpdateCategory = {
   name?: Maybe<Scalars["String"]>;
@@ -435,7 +436,7 @@ export enum ShippingType {
   /** Percentage */
   Percentage = "percentage",
   /** Free */
-  Free = "free_shipping",
+  Free = "free shipping",
 }
 
 export type Tax = {
@@ -657,7 +658,8 @@ export declare type RegisterInput = {
   email: Scalars["String"];
   password: Scalars["String"];
   name: Scalars["String"];
-  shop_id?: Scalars["Int"];
+  measurement: Maybe<Measurement>;
+  shop_id?: Scalars["String"];
   permission: Permission;
 };
 
@@ -894,7 +896,7 @@ export declare type Withdraw = {
   id?: Maybe<Scalars["ID"]>;
   amount?: Maybe<Scalars["Float"]>;
   status?: Maybe<WithdrawStatus>;
-  shop_id?: Maybe<Scalars["Int"]>;
+  shop_id?: Maybe<Scalars["String"]>;
   shop?: Maybe<Shop>;
   payment_method?: Maybe<Scalars["String"]>;
   details?: Maybe<Scalars["String"]>;
@@ -916,7 +918,7 @@ export declare type WithdrawPaginator = {
 
 export declare type CreateWithdrawInput = {
   amount: Scalars["Float"];
-  shop_id: Scalars["Int"];
+  shop_id: Scalars["String"];
   payment_method?: Maybe<Scalars["String"]>;
   details?: Maybe<Scalars["String"]>;
   note?: Maybe<Scalars["String"]>;
@@ -926,7 +928,7 @@ export declare type AddStaffInput = {
   email: Scalars["String"];
   password: Scalars["String"];
   name: Scalars["String"];
-  shop_id: Scalars["Int"];
+  shop_id: Scalars["String"];
 };
 
 export declare type ShopSettings = {
@@ -990,3 +992,21 @@ export declare type TypeSettingsInput = {
   layoutType?: Maybe<Scalars["String"]>;
   productCard?: Maybe<Scalars["String"]>;
 };
+
+export declare type Measurement = {
+  bustName?: Maybe<Scalars["String"]>;
+    waistName?: Maybe<Scalars["String"]>;
+    hipName?: Maybe<Scalars["String"]>;
+    shoulderWaistName?: Maybe<Scalars["String"]>;
+    shoulderNippleName?: Maybe<Scalars["String"]>;
+    shoulderUnderBustName?: Maybe<Scalars["String"]>;
+    blouseLengthName?: Maybe<Scalars["String"]>;
+    fullLengthName?: Maybe<Scalars["String"]>;
+    dressLegthName?: Maybe<Scalars["String"]>;
+    slitLengthName?: Maybe<Scalars["String"]>;
+    acrossBackName?: Maybe<Scalars["String"]>;
+    acrossChestName?: Maybe<Scalars["String"]>;
+    aroundArmName?: Maybe<Scalars["String"]>;
+    sleeveLengthName?: Maybe<Scalars["String"]>;
+    shirtLenghtName?: Maybe<Scalars["String"]>;
+}

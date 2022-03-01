@@ -44,13 +44,13 @@ const AttributeList = ({ attributes, onSort, onOrder }: IProps) => {
   });
 
   let columns = [
-    {
-      title: t("table:table-item-id"),
-      dataIndex: "id",
-      key: "id",
-      align: "center",
-      width: 60,
-    },
+    // {
+    //   title: t("table:table-item-id"),
+    //   dataIndex: "id",
+    //   key: "id",
+    //   align: "center",
+    //   width: 60,
+    // },
     {
       // title: t("table:table-item-title"),
       title: (
@@ -69,17 +69,17 @@ const AttributeList = ({ attributes, onSort, onOrder }: IProps) => {
       onHeaderCell: () => onHeaderClick("name"),
       render: (name: any) => <span className="whitespace-nowrap">{name}</span>,
     },
-    {
-      title: t("table:table-item-shop"),
-      dataIndex: "shop",
-      key: "shop",
-      width: 120,
-      align: "center",
-      ellipsis: true,
-      render: (shop: Shop) => (
-        <span className="whitespace-nowrap truncate">{shop?.name}</span>
-      ),
-    },
+    // {
+    //   title: t("table:table-item-shop"),
+    //   dataIndex: "shop",
+    //   key: "shop",
+    //   width: 120,
+    //   align: "center",
+    //   ellipsis: true,
+    //   render: (shop: Shop) => (
+    //     <span className="whitespace-nowrap truncate">{shop?.name}</span>
+    //   ),
+    // },
     {
       title: t("table:table-item-values"),
       dataIndex: "values",

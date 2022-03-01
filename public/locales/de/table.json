@@ -13,7 +13,7 @@
   "table-item-description": "Beschreibung",
   "table-item-status": "Status",
   "table-item-actions": "Aktionen",
-  "table-item-tracking-number": "Auftragsnummer, Frachtnummer, Sendungscode",
+  "table-item-customer": "Auftragsnummer, Frachtnummer, Sendungscode",
   "table-item-total": "Gesamt",
   "table-item-order-date": "Bestelldatum",
   "table-item-icon": "Symbol",

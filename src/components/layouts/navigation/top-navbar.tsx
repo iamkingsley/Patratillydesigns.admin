@@ -35,7 +35,7 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center space-s-8">
-          {hasAccess(adminAndOwnerOnly, permissions) && (
+          {/* {hasAccess(adminAndOwnerOnly, permissions) && (
             <LinkButton
               href={ROUTES.CREATE_SHOP}
               className="ms-4 md:ms-6"
@@ -43,7 +43,7 @@ const Navbar = () => {
             >
               {t("common:text-create-shop")}
             </LinkButton>
-          )}
+          )} */}
 
           <AuthorizedMenu />
         </div>

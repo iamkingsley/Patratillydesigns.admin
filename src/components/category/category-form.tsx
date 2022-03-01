@@ -164,6 +164,7 @@ export default function CreateOrUpdateCategoriesForm({
     useUpdateCategoryMutation();
 
   const onSubmit = async (values: FormValues) => {
+    console.log('values: ', values)
     const input = {
       name: values.name,
       details: values.details,
@@ -173,13 +174,14 @@ export default function CreateOrUpdateCategoriesForm({
         id: values?.image?.id,
       },
       icon: values.icon?.value || "",
-      parent: values.parent?.id,
+      parent: values.parent?._id,
+      parent_id: values.parent?.id,
       type_id: values.type?.id,
     };
     if (initialValues) {
       updateCategory({
         variables: {
-          id: initialValues?.id,
+          id: initialValues?.slug,
           input: {
             ...input,
           },
@@ -244,7 +246,7 @@ export default function CreateOrUpdateCategoriesForm({
               isClearable={true}
             />
           </div>
-          <SelectTypes control={control} errors={errors} />
+          {/* <SelectTypes control={control} errors={errors} /> */}
           <SelectCategories control={control} setValue={setValue} />
         </Card>
       </div>

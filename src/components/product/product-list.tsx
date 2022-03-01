@@ -92,28 +92,28 @@ const ProductList = ({ products, onPagination, onSort, onOrder }: IProps) => {
       ellipsis: true,
       onHeaderCell: () => onHeaderClick("name"),
     },
-    {
-      title: t("table:table-item-group"),
-      dataIndex: "type",
-      key: "type",
-      width: 120,
-      align: "center",
-      ellipsis: true,
-      render: (type: any) => (
-        <span className="whitespace-nowrap truncate">{type?.name}</span>
-      ),
-    },
-    {
-      title: t("table:table-item-shop"),
-      dataIndex: "shop",
-      key: "shop",
-      width: 120,
-      align: "center",
-      ellipsis: true,
-      render: (shop: Shop) => (
-        <span className="whitespace-nowrap truncate">{shop?.name}</span>
-      ),
-    },
+    // {
+    //   title: t("table:table-item-group"),
+    //   dataIndex: "type",
+    //   key: "type",
+    //   width: 120,
+    //   align: "center",
+    //   ellipsis: true,
+    //   render: (type: any) => (
+    //     <span className="whitespace-nowrap truncate">{type?.name}</span>
+    //   ),
+    // },
+    // {
+    //   title: t("table:table-item-shop"),
+    //   dataIndex: "shop",
+    //   key: "shop",
+    //   width: 120,
+    //   align: "center",
+    //   ellipsis: true,
+    //   render: (shop: Shop) => (
+    //     <span className="whitespace-nowrap truncate">{shop?.name}</span>
+    //   ),
+    // },
     {
       title: "Product Type",
       dataIndex: "product_type",

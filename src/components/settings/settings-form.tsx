@@ -14,7 +14,7 @@ import Label from "@components/ui/label";
 import { CURRENCY } from "./currency";
 import { siteSettings } from "@settings/site.settings";
 import ValidationError from "@components/ui/form-validation-error";
-import { useUpdateSettingsMutation } from "@data/settings/use-settings-update.mutation";
+import { useUpdateSettingsMutation, useCreateSettingsMutation } from "@data/settings/use-settings-update.mutation";
 import { useTranslation } from "next-i18next";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { settingsValidationSchema } from "./settings-validation-schema";
@@ -27,6 +27,7 @@ import { getIcon } from "@utils/get-icon";
 import * as socialIcons from "@components/icons/social";
 import GooglePlacesAutocomplete from "@components/form/google-places-autocomplete";
 import omit from "lodash/omit";
+import RichTextEditor from "@components/ui/rich-text";
 
 type FormValues = {
   siteTitle: string;
@@ -54,6 +55,7 @@ type FormValues = {
     metaTags: string;
     canonicalUrl: string;
   };
+  aboutUs: string,
   google: {
     isEnable: boolean;
     tagManagerId: string;
@@ -101,19 +103,22 @@ export const updatedIcons = socialIcon.map((item: any) => {
 });
 
 type IProps = {
-  settings?: SettingsOptions | null;
+  data?: any | null;
+  // settings?: SettingsOptions | null;
   taxClasses: Tax[] | undefined | null;
   shippingClasses: Shipping[] | undefined | null;
 };
 
 export default function SettingsForm({
-  settings,
+  data,
   taxClasses,
   shippingClasses,
 }: IProps) {
+  const { options: settings } = data;
   const { t } = useTranslation();
   const { mutate: updateSettingsMutation, isLoading: loading } =
     useUpdateSettingsMutation();
+  const { mutate: createSettingsMutation } = useCreateSettingsMutation();
   const {
     register,
     handleSubmit,
@@ -125,30 +130,31 @@ export default function SettingsForm({
     resolver: yupResolver(settingsValidationSchema),
     defaultValues: {
       ...settings,
-      contactDetails: {
-        ...settings?.contactDetails,
-        socials: settings?.contactDetails?.socials
-          ? settings?.contactDetails?.socials.map((social: any) => ({
-              icon: updatedIcons?.find((icon) => icon?.value === social?.icon),
-              url: social?.url,
-            }))
-          : [],
-      },
-      deliveryTime: settings?.deliveryTime ? settings?.deliveryTime : [],
-      logo: settings?.logo ?? "",
+      // contactDetails: {
+      //   ...settings?.contactDetails,
+      //   socials: settings?.contactDetails?.socials
+      //     ? settings?.contactDetails?.socials.map((social: any) => ({
+      //         icon: updatedIcons?.find((icon) => icon?.value === social?.icon),
+      //         url: social?.url,
+      //       }))
+      //     : [],
+      // },
+      // deliveryTime: settings?.deliveryTime ? settings?.deliveryTime : [],
+      // logo: settings?.logo ?? "",
       currency: settings?.currency
         ? CURRENCY.find((item) => item.code == settings?.currency)
         : "",
-      // @ts-ignore
+      // // @ts-ignore
       taxClass: !!taxClasses?.length
         ? taxClasses?.find((tax: Tax) => tax.id == settings?.taxClass)
         : "",
-      // @ts-ignore
+      // // @ts-ignore
       shippingClass: !!shippingClasses?.length
         ? shippingClasses?.find(
             (shipping: Shipping) => shipping.id == settings?.shippingClass
           )
         : "",
+      aboutUs: settings?.aboutUs ? settings.aboutUs : "",
     },
   });
 
@@ -177,28 +183,56 @@ export default function SettingsForm({
           }))
         : [],
     };
-    updateSettingsMutation({
-      variables: {
-        input: {
-          options: {
-            ...values,
-            signupPoints: Number(values.signupPoints),
-            currencyToWalletRatio: Number(values.currencyToWalletRatio),
-            minimumOrderAmount: Number(values.minimumOrderAmount),
-            currency: values.currency?.code,
-            taxClass: values?.taxClass?.id,
-            shippingClass: values?.shippingClass?.id,
-            logo: values?.logo,
-            contactDetails,
-            //@ts-ignore
-            seo: {
-              ...values?.seo,
-              ogImage: getFormattedImage(values?.seo?.ogImage),
+    if (data.id) {
+      updateSettingsMutation({
+        variables: {
+          id: data.id,
+          input: {
+            options: {
+              ...values,
+              image: undefined,
+              signupPoints: Number(values.signupPoints),
+              currencyToWalletRatio: Number(values.currencyToWalletRatio),
+              minimumOrderAmount: Number(values.minimumOrderAmount),
+              currency: values.currency?.code,
+              taxClass: values?.taxClass?.id,
+              shippingClass: values?.shippingClass?.id,
+              logo: undefined, // values?.logo,
+              contactDetails,
+              //@ts-ignore
+              seo: {
+                ...values?.seo,
+                // ogImage: getFormattedImage(values?.seo?.ogImage),
+              },
             },
           },
         },
-      },
-    });
+      });
+    } else {
+      createSettingsMutation({
+        variables: {
+          input: {
+            options: {
+              ...values,
+              image: undefined,
+              signupPoints: Number(values.signupPoints),
+              currencyToWalletRatio: Number(values.currencyToWalletRatio),
+              minimumOrderAmount: Number(values.minimumOrderAmount),
+              currency: values.currency?.code,
+              taxClass: values?.taxClass?.id,
+              shippingClass: values?.shippingClass?.id,
+              logo: undefined, // values?.logo,
+              contactDetails,
+              //@ts-ignore
+              seo: {
+                ...values?.seo,
+                // ogImage: getFormattedImage(values?.seo?.ogImage),
+              },
+            },
+          },
+        },
+      });
+    }
   }
 
   const logoInformation = (
@@ -268,22 +302,22 @@ export default function SettingsForm({
             variant="outline"
             className="mb-5"
           />
-          <Input
+          {/* <Input
             label={`${t("form:input-label-wallet-currency-ratio")}`}
             {...register("currencyToWalletRatio")}
             type="number"
             error={t(errors.currencyToWalletRatio?.message!)}
             variant="outline"
             className="mb-5"
-          />
-          <Input
+          /> */}
+          {/* <Input
             label={`${t("form:input-label-signup-points")}`}
             {...register("signupPoints")}
             type="number"
             error={t(errors.signupPoints?.message!)}
             variant="outline"
             className="mb-5"
-          />
+          /> */}
           <div className="mb-5">
             <Label>{t("form:input-label-tax-class")}</Label>
             <SelectInput
@@ -333,7 +367,7 @@ export default function SettingsForm({
             variant="outline"
             className="mb-5"
           />
-          <Input
+          {/* <Input
             label={t("form:input-label-canonical-url")}
             {...register("seo.canonicalUrl")}
             variant="outline"
@@ -354,7 +388,7 @@ export default function SettingsForm({
           <div className="mb-5">
             <Label>{t("form:input-label-og-image")}</Label>
             <FileInput name="seo.ogImage" control={control} multiple={false} />
-          </div>
+          </div> */}
           <Input
             label={t("form:input-label-twitter-handle")}
             {...register("seo.twitterHandle")}
@@ -368,6 +402,22 @@ export default function SettingsForm({
             variant="outline"
             className="mb-5"
             placeholder="one of summary, summary_large_image, app, or player"
+          />
+        </Card>
+      </div>
+
+      <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
+        <Description
+          title={t("form:form-title-about")}
+          details={t("form:form-about-info-help-text")}
+          className="w-full px-0 sm:pr-4 md:pr-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8"
+        />
+
+        <Card className="w-full sm:w-8/12 md:w-2/3">
+          <RichTextEditor 
+            name="aboutUs" 
+            control={control} 
+            // rules={{required: true}}
           />
         </Card>
       </div>

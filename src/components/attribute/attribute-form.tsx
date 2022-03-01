@@ -54,7 +54,7 @@ export default function CreateOrUpdateAttributeForm({ initialValues }: IProps) {
           variables: {
             input: {
               name: values.name!,
-              shop_id: Number(shopId),
+              shop_id: shopId,
               values: values.values,
             },
           },
@@ -72,9 +72,9 @@ export default function CreateOrUpdateAttributeForm({ initialValues }: IProps) {
           id: initialValues.id,
           input: {
             name: values.name!,
-            shop_id: Number(initialValues?.shop_id),
-            values: values.values.map(({ id, value, meta }: any) => ({
-              id: Number(id),
+            // shop_id: initialValues?.shop_id,
+            values: values.values.map(({ _id, value, meta }: any) => ({
+              _id,
               value,
               meta,
             })),

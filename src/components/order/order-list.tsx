@@ -12,6 +12,7 @@ import {
   OrderPaginator,
   OrderStatus,
   SortOrder,
+  User,
   UserAddress,
 } from "@ts-types/generated";
 import InvoicePdf from "./invoice-pdf";
@@ -61,11 +62,14 @@ const OrderList = ({ orders, onPagination, onSort, onOrder }: IProps) => {
 
   const columns = [
     {
-      title: t("table:table-item-tracking-number"),
-      dataIndex: "tracking_number",
-      key: "tracking_number",
+      title: t("table:table-item-customer"),
+      dataIndex: "customer",
+      key: "customer",
       align: "center",
       width: 150,
+      render: (customer: User) => {
+        return <span>{customer?.name}</span>;
+      },
     },
     {
       title: t("table:table-item-delivery-fee"),
