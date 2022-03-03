@@ -4,13 +4,13 @@ export interface State {
 }
 
 const initialState = {
-  siteTitle: "PatraTillyDesigns",
+  siteTitle: "Patra Tilly Designs",
   siteSubtitle: "",
   currency: "GHS",
   logo: {
     id: 1,
-    thumbnail: "/patra-tilly.jpg",
-    original: "/patra-tilly.jpg",
+    thumbnail: "/patra-tilly-variant.png",
+    original: "/patra-tilly-variant.png",
   },
 };
 
