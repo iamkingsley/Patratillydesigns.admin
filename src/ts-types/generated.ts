@@ -271,6 +271,7 @@ export declare type Category = {
   products: Array<Product>;
   created_at: Scalars["DateTime"];
   updated_at: Scalars["DateTime"];
+  is_featured?: Maybe<Scalars["Boolean"]>;
 };
 export declare type Attachment = {
   thumbnail?: Maybe<Scalars["String"]>;
@@ -386,6 +387,7 @@ export declare type CreateCategory = {
   details?: Maybe<Scalars["String"]>;
   image?: Maybe<AttachmentInput>;
   icon?: Maybe<Scalars["String"]>;
+  is_featured?: Maybe<Scalars["Boolean"]>;
 };
 export declare type ConnectTypeBelongsTo = {
   connect?: Maybe<Scalars["ID"]>;
