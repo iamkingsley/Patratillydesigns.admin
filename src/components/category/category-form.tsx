@@ -27,6 +27,7 @@ import FileInput from "@components/ui/file-input";
 import SelectInput from "@components/ui/select-input";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { categoryValidationSchema } from "./category-validation-schema";
+import Checkbox from "@components/ui/checkbox/checkbox";
 
 export const updatedIcons = categoryIcons.map((item: any) => {
   item.label = (
@@ -116,15 +117,17 @@ type FormValues = {
   image: any;
   icon: any;
   type: any;
+  is_featured: boolean;
 };
 
 const defaultValues = {
-  image: [],
+  image: "",
   name: "",
   details: "",
   parent: "",
   icon: "",
   type: "",
+  is_featured: false,
 };
 
 type IProps = {
@@ -164,15 +167,16 @@ export default function CreateOrUpdateCategoriesForm({
     useUpdateCategoryMutation();
 
   const onSubmit = async (values: FormValues) => {
-    console.log('values: ', values)
     const input = {
       name: values.name,
       details: values.details,
       image: {
         thumbnail: values?.image?.thumbnail,
         original: values?.image?.original,
+        _id: values?.image?._id,
         id: values?.image?.id,
       },
+      is_featured: values.is_featured,
       icon: values.icon?.value || "",
       parent: values.parent?._id,
       parent_id: values.parent?.id,
@@ -248,6 +252,14 @@ export default function CreateOrUpdateCategoriesForm({
           </div>
           {/* <SelectTypes control={control} errors={errors} /> */}
           <SelectCategories control={control} setValue={setValue} />
+          <div className="mt-5">
+            <Label>{t("form:input-label-featured-category")}</Label>
+            <Checkbox
+              {...register("is_featured")}
+              error={t(errors.is_featured?.message!)}
+              label={t("form:input-label-featured-category-note")}
+            />
+          </div>
         </Card>
       </div>
       <div className="mb-4 text-end">

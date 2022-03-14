@@ -430,11 +430,11 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
               </div>
 
               <div>
-                <Label>{t("form:input-label-is-featured")}</Label>
+                <Label>{t("form:input-label-featured-product")}</Label>
                 <Checkbox
                   {...register("is_featured")}
                   error={t(errors.is_featured?.message!)}
-                  label={t("form:input-label-is-featured-note")}
+                  label={t("form:input-label-featured-product-note")}
                   className="mb-5"
                 />
               </div>
