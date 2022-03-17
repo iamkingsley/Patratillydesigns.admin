@@ -138,7 +138,7 @@ function calculateMaxMinPrice(variationOptions: any) {
   return {
     min_price:
       sortedVariationsBySalePrice?.[0].sale_price <
-      sortedVariationsByPrice?.[0]?.price
+        sortedVariationsByPrice?.[0]?.price
         ? Number(sortedVariationsBySalePrice?.[0].sale_price)
         : Number(sortedVariationsByPrice?.[0]?.price),
     max_price: Number(
@@ -167,20 +167,20 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
     //@ts-ignore
     defaultValues: initialValues
       ? cloneDeep({
-          ...initialValues,
-          // type: initialValues?.type,
-          isVariation:
-            initialValues.variations?.length &&
+        ...initialValues,
+        // type: initialValues?.type,
+        isVariation:
+          initialValues.variations?.length &&
             initialValues.variation_options?.length
-              ? true
-              : false,
-          productTypeValue: initialValues.product_type
-            ? productType.find(
-                (type) => initialValues.product_type === type.value
-              )
-            : productType[0],
-          variations: getFormattedVariations(initialValues?.variations),
-        })
+            ? true
+            : false,
+        productTypeValue: initialValues.product_type
+          ? productType.find(
+            (type) => initialValues.product_type === type.value
+          )
+          : productType[0],
+        variations: getFormattedVariations(initialValues?.variations),
+      })
       : defaultValues,
   });
   const {
@@ -197,10 +197,8 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
     useCreateProductMutation();
   const { mutate: updateProduct, isLoading: updating } =
     useUpdateProductMutation();
-  console.log('initial: ', initialValues)
   const onSubmit = async (values: FormValues) => {
     const { type } = values;
-    console.log('type', type)
     const inputValues: any = {
       description: values.description,
       height: values.height,
@@ -230,11 +228,12 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
         id: values?.image?.id,
         _id: values?.image?._id,
       },
-      // gallery: values.gallery?.map(({ thumbnail, original, id }: any) => ({
-      //   thumbnail,
-      //   original,
-      //   id,
-      // })),
+      gallery: values.gallery?.map(({ thumbnail, original, id, _id }: any) => ({
+        thumbnail,
+        original,
+        id,
+        _id
+      })),
       ...(productTypeValue?.value === ProductType.Variable && {
         variations: values?.variations?.flatMap(({ value }: any) =>
           value?.map(({ id }: any) => ({ attribute_value_id: id }))
@@ -242,40 +241,40 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
       }),
       ...(productTypeValue?.value === ProductType.Variable
         ? {
-            variation_options: {
-              upsert: values?.variation_options?.map(
-                ({ options, ...rest }: any) => ({
-                  ...rest,
-                  options: processOptions(options).map(
-                    ({ name, value }: VariationOption) => ({
-                      name,
-                      value,
-                    })
-                  ),
-                })
-              ),
-              delete: initialValues?.variation_options
-                ?.map((initialVariationOption) => {
-                  const find = values?.variation_options?.find(
-                    (variationOption) =>
-                      variationOption?.id === initialVariationOption?.id
-                  );
-                  if (!find) {
-                    return initialVariationOption?.id;
-                  }
-                })
-                .filter((item) => item !== undefined),
-            },
-          }
+          variation_options: {
+            upsert: values?.variation_options?.map(
+              ({ options, ...rest }: any) => ({
+                ...rest,
+                options: processOptions(options).map(
+                  ({ name, value }: VariationOption) => ({
+                    name,
+                    value,
+                  })
+                ),
+              })
+            ),
+            delete: initialValues?.variation_options
+              ?.map((initialVariationOption) => {
+                const find = values?.variation_options?.find(
+                  (variationOption) =>
+                    variationOption?.id === initialVariationOption?.id
+                );
+                if (!find) {
+                  return initialVariationOption?.id;
+                }
+              })
+              .filter((item) => item !== undefined),
+          },
+        }
         : {
-            variations: [],
-            // variation_options: {
-            //   upsert: [],
-            //   delete: initialValues?.variation_options?.map(
-            //     (variation) => variation?.id
-            //   ),
-            // },
-          }),
+          variations: [],
+          // variation_options: {
+          //   upsert: [],
+          //   delete: initialValues?.variation_options?.map(
+          //     (variation) => variation?.id
+          //   ),
+          // },
+        }),
       ...calculateMaxMinPrice(values?.variation_options),
     };
 
@@ -379,11 +378,10 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
           <div className="flex flex-wrap my-5 sm:my-8">
             <Description
               title={t("form:item-description")}
-              details={`${
-                initialValues
-                  ? t("form:item-description-edit")
-                  : t("form:item-description-add")
-              } ${t("form:product-description-help-text")}`}
+              details={`${initialValues
+                ? t("form:item-description-edit")
+                : t("form:item-description-add")
+                } ${t("form:product-description-help-text")}`}
               className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8"
             />
 
