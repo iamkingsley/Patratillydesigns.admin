@@ -14,7 +14,7 @@ import { productValidationSchema } from "./product-validation-schema";
 import groupBy from "lodash/groupBy";
 import ProductVariableForm from "./product-variable-form";
 import ProductSimpleForm from "./product-simple-form";
-import ProductGroupInput from "./product-group-input";
+// import ProductGroupInput from "./product-group-input";
 import ProductCategoryInput from "./product-category-input";
 import orderBy from "lodash/orderBy";
 import sum from "lodash/sum";
@@ -198,7 +198,6 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
   const { mutate: updateProduct, isLoading: updating } =
     useUpdateProductMutation();
   const onSubmit = async (values: FormValues) => {
-    const { type } = values;
     const inputValues: any = {
       description: values.description,
       height: values.height,
@@ -235,49 +234,28 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
         _id
       })),
       ...(productTypeValue?.value === ProductType.Variable && {
-        variations: values?.variations?.flatMap(({ value }: any) =>
-          value?.map(({ id }: any) => ({ attribute_value_id: id }))
+        // variations: values?.variations?.flatMap(({ value }: any) =>
+        //   value?.map(({ id }: any) => ({ attribute_value_id: id }))
+        // ),
+        variations: values?.variations?.flatMap(({ attribute, value }: any) =>
+          value?.map(({ value, meta }: any) => ({ attribute, value, meta }))
         ),
       }),
-      ...(productTypeValue?.value === ProductType.Variable
-        ? {
-          variation_options: {
-            upsert: values?.variation_options?.map(
-              ({ options, ...rest }: any) => ({
-                ...rest,
-                options: processOptions(options).map(
-                  ({ name, value }: VariationOption) => ({
-                    name,
-                    value,
-                  })
-                ),
+      ...(productTypeValue?.value === ProductType.Variable && {
+        variation_options: values?.variation_options?.map(
+          ({ options, ...rest }: any) => ({
+            ...rest,
+            options: processOptions(options).map(
+              ({ name, value }: VariationOption) => ({
+                name,
+                value,
               })
             ),
-            delete: initialValues?.variation_options
-              ?.map((initialVariationOption) => {
-                const find = values?.variation_options?.find(
-                  (variationOption) =>
-                    variationOption?.id === initialVariationOption?.id
-                );
-                if (!find) {
-                  return initialVariationOption?.id;
-                }
-              })
-              .filter((item) => item !== undefined),
-          },
-        }
-        : {
-          variations: [],
-          // variation_options: {
-          //   upsert: [],
-          //   delete: initialValues?.variation_options?.map(
-          //     (variation) => variation?.id
-          //   ),
-          // },
-        }),
+          })
+        )
+      }),
       ...calculateMaxMinPrice(values?.variation_options),
     };
-
     if (initialValues) {
       updateProduct(
         {

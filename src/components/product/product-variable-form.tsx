@@ -11,9 +11,10 @@ import SelectInput from "@components/ui/select-input";
 import { cartesian } from "@utils/cartesian";
 import isEmpty from "lodash/isEmpty";
 import { useEffect } from "react";
-import { Product } from "@ts-types/generated";
+import { AttributeValueInput, Product } from "@ts-types/generated";
 import { useTranslation } from "next-i18next";
 import { useAttributesQuery } from "@data/attributes/use-attributes.query";
+import { isArray } from "lodash";
 
 type IProps = {
   initialValues?: Product | null;
@@ -24,7 +25,7 @@ function filteredAttributes(attributes: any, variations: any) {
   let res = [];
   res = attributes?.filter((el: any) => {
     return !variations.find((element: any) => {
-      return element?.attribute?.slug === el?.slug;
+      return element?.attribute?.id === el?.id;
     });
   });
   return res;
@@ -37,7 +38,8 @@ function getCartesianProduct(values: any) {
     )
     .filter((i: any) => i !== undefined);
   if (isEmpty(formattedValues)) return [];
-  return cartesian(...formattedValues);
+  // return cartesian(...formattedValues);
+  return formattedValues;
 }
 
 export default function ProductVariableForm({ shopId, initialValues }: IProps) {
@@ -59,9 +61,9 @@ export default function ProductVariableForm({ shopId, initialValues }: IProps) {
     control,
     name: "variations",
   });
+  console.log('fields: ', fields)
   const cartesianProduct = getCartesianProduct(getValues("variations"));
   const variations = watch("variations");
-
   const attributes = data?.attributes;
   return (
     <div className="flex flex-wrap my-5 sm:my-8">
@@ -116,12 +118,12 @@ export default function ProductVariableForm({ shopId, initialValues }: IProps) {
                     <div className="mt-5 col-span-2">
                       <Label>{t("form:input-label-attribute-value")}*</Label>
                       <SelectInput
-                        isMulti
+                        isMulti={true}
                         name={`variations[${index}].value`}
                         control={control}
                         defaultValue={field.value}
-                        getOptionLabel={(option: any) => option.value}
-                        getOptionValue={(option: any) => option.id}
+                        getOptionLabel={(option: AttributeValueInput) => option.value}
+                        getOptionValue={(option: AttributeValueInput) => option.id}
                         options={
                           watch(`variations[${index}].attribute`)?.values
                         }
@@ -159,14 +161,15 @@ export default function ProductVariableForm({ shopId, initialValues }: IProps) {
                       key={`fieldAttributeValues-${index}`}
                       className="border-b last:border-0 border-dashed border-border-200 p-5 md:p-8 md:last:pb-0 mb-5 last:mb-8 mt-5"
                     >
-                      <Title className="!text-lg mb-8">
+                      {/* <Title className="!text-lg mb-8">
                         {t("form:form-title-variant")}:{" "}
                         <span className="text-blue-600 font-normal">
-                          {Array.isArray(fieldAttributeValue)
+                          {/* {Array.isArray(fieldAttributeValue)
                             ? fieldAttributeValue?.map((a) => a.value).join("/")
-                            : fieldAttributeValue.value}
+                            : fieldAttributeValue.value[index]?.value} */}
+                            {/* : fieldAttributeValue.value?.value}
                         </span>
-                      </Title>
+                      </Title> */}
                       <TitleAndOptionsInput
                         register={register}
                         setValue={setValue}
@@ -259,6 +262,7 @@ export const TitleAndOptionsInput = ({
     setValue(`variation_options.${index}.title`, title);
     setValue(`variation_options.${index}.options`, options);
   }, [fieldAttributeValue]);
+  console.log('fieldAttributeValue', fieldAttributeValue)
   return (
     <>
       <input {...register(`variation_options.${index}.title`)} type="hidden" />
