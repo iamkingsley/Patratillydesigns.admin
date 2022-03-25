@@ -36,7 +36,7 @@ import { useUpdateProductMutation } from "@data/product/product-update.mutation"
 import { useShopQuery } from "@data/shop/use-shop.query";
 import ProductTagInput from "./product-tag-input";
 import Alert from "@components/ui/alert";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { animateScroll } from "react-scroll";
 import { useModalAction } from "@components/ui/modal/modal.context";
 import { CloseIcon } from "@components/icons/close-icon";
@@ -156,6 +156,13 @@ function calculateQuantity(variationOptions: any) {
   );
 }
 export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
+  useEffect(() => {
+    if (initialValues?.variations) {
+      setValue('variations', initialValues?.variations as any)
+      setValue('variation_options', initialValues?.variation_options)
+    }
+  }, [initialValues])
+  
   const router = useRouter();
   const { openModal } = useModalAction();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -192,6 +199,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
     handleSubmit,
     control,
     setValue,
+    getValues,
     setError,
     watch,
     formState: { errors },
@@ -481,7 +489,12 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
                       openModal("ADD_OPTION", {
                         shopId,
                         initialValues,
+                        previousOptions: {
+                          variations: watch('variations'),
+                          variation_options: watch('variation_options')
+                        },
                         setValue,
+                        getValues,
                       });
                     }}
                     type="button"
@@ -490,7 +503,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
                   </Button>
                 </div>
                 <div className="flex flex-col px-5 my-5">
-                  {variations?.map((vr, i) => (
+                  {watch('variations')?.map((vr, i) => (
                     <div key={i} className="flex justify-between items-center rounded border border-2 p-2 mb-2 last:mb-0">
                       <div className="flex justify-between w-full px-2 mr-5">
                         <p className="text-sm font-semibold">

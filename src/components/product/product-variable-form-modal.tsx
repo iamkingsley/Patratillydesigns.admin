@@ -20,15 +20,14 @@ type IProps = {
 
 export default function ProductVariableForm() {
   const { t } = useTranslation();
-  const { data, isLoading } = useAttributesQuery({
+  const { data: attrResult, isLoading } = useAttributesQuery({
     // shop_id: initialValues ? Number(initialValues.shop_id) : Number(shopId),
   });
   const {
     register,
     control,
-    watch,
     setValue,
-    getValues,
+    watch,
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -41,33 +40,34 @@ export default function ProductVariableForm() {
   });
 
   const {
-    data:_data
+    data
   } = useModalState();
   const { closeModal } = useModalAction();
-
-  const { initialValues } = _data;
-  const attributes = data?.attributes;
+  const attributes = attrResult?.attributes;
 
   useEffect(() => {
-    console.log('_data: ', _data)
     append({ attribute: "", value: [] });
-    // if (_data) {
+    // if (data) {
     //   append({
-    //     attribute: _data.initialValues.variations[0].attribute,
-    //     value: _data.initialValues.variations[0].attribute.value 
+    //     attribute: data.initialValues.variations[0].attribute,
+    //     value: data.initialValues.variations[0].attribute.values.
+    //       filter((v) => v.value === data.initialValues.variations[0].value[0].value)
     //   })
+    //   setValue('variation_options', data.initialValues.variation_options)
     // } else {
     //   append({ attribute: "", value: [] });
     // }
-  }, [_data])
+  }, [data])
 
   // sanitize values before sending
   const onSubmit = (values) => {
-    const _variations = initialValues?.variations ? 
-      initialValues?.variations.concat(values.variations)
-        : values.variations;
-        _data.setValue('variations', _variations)
-
+    let _variations = values.variations;
+    if (data.previousOptions.variations) {
+      _variations = _variations.concat([...data.previousOptions.variations])
+    }
+    data.setValue('variations', _variations)
+    
+    // format variation options
     const _options = [{
       title: _variations[0]?.value[0]?.value,
       ...values.variation_options,
@@ -76,14 +76,14 @@ export default function ProductVariableForm() {
         value: values.variations[0]?.value[0]?.meta 
       }]
     }]
-    const _variation_options = initialValues?.variation_options ? 
-      initialValues?.variation_options.concat(_options) 
-        : _options;
 
-    _data.setValue('variation_options', _variation_options)
+    let _variation_options: any[] = _options;
+    if (data.previousOptions?.variation_options) {
+      _variation_options = _variation_options.concat([...data.previousOptions?.variation_options])
+    }
+    data.setValue('variation_options', _variation_options)
 
     closeModal();
-    console.log(values);
   };
 
   return (
@@ -210,7 +210,7 @@ export default function ProductVariableForm() {
                     {t("form:button-label-back")}
                   </Button>
                   <Button>
-                    {_data
+                    {data
                       ? t("form:button-label-update-product")
                       : t("form:button-label-add-product")}
                   </Button>
