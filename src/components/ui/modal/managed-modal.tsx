@@ -50,6 +50,9 @@ const UpdateRefundConfirmationView = dynamic(
 const RefundImageModal = dynamic(
   () => import("@components/refund/refund-image-modal")
 );
+const ProductOptionsView = dynamic(
+  () => import("@components/product/product-variable-form-modal")
+);
 
 const ManagedModal = () => {
   const { isOpen, view } = useModalState();
@@ -58,6 +61,7 @@ const ManagedModal = () => {
   return (
     <Modal open={isOpen} onClose={closeModal}>
       {view === "DELETE_PRODUCT" && <ProductDeleteView />}
+      {view === "ADD_OPTION" && <ProductOptionsView />}
       {view === "DELETE_TYPE" && <TypeDeleteView />}
       {view === "DELETE_ATTRIBUTE" && <AttributeDeleteView />}
       {view === "DELETE_CATEGORY" && <CategoryDeleteView />}

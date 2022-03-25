@@ -194,7 +194,7 @@ const ProductList = ({ products, onPagination, onSort, onOrder }: IProps) => {
         <Badge
           text={status}
           color={
-            status.toLocaleLowerCase() === "draft"
+            status?.toLocaleLowerCase() === "draft"
               ? "bg-yellow-400"
               : "bg-accent"
           }

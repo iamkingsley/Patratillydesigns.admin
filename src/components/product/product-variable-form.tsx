@@ -8,13 +8,13 @@ import Title from "@components/ui/title";
 
 import Checkbox from "@components/ui/checkbox/checkbox";
 import SelectInput from "@components/ui/select-input";
-import { cartesian } from "@utils/cartesian";
+// import { cartesian } from "@utils/cartesian";
 import isEmpty from "lodash/isEmpty";
 import { useEffect } from "react";
 import { AttributeValueInput, Product } from "@ts-types/generated";
 import { useTranslation } from "next-i18next";
 import { useAttributesQuery } from "@data/attributes/use-attributes.query";
-import { isArray } from "lodash";
+// import { isArray } from "lodash";
 
 type IProps = {
   initialValues?: Product | null;
@@ -34,7 +34,8 @@ function filteredAttributes(attributes: any, variations: any) {
 function getCartesianProduct(values: any) {
   const formattedValues = values
     ?.map((v: any) =>
-      v.value?.map((a: any) => ({ name: v.attribute.name, value: a.value }))
+      ({...v, value: { name: v.attribute?.name, value: v.value }})
+      // v?.value?.map((a: any) => ({ name: v?.attribute?.name, value: a?.value }))
     )
     .filter((i: any) => i !== undefined);
   if (isEmpty(formattedValues)) return [];
@@ -110,7 +111,8 @@ export default function ProductVariableForm({ shopId, initialValues }: IProps) {
                         defaultValue={field.attribute}
                         getOptionLabel={(option: any) => option.name}
                         getOptionValue={(option: any) => option.id}
-                        options={filteredAttributes(attributes, variations)!}
+                        options={attributes}
+                        // options={filteredAttributes(attributes, variations)!}
                         isLoading={isLoading}
                       />
                     </div>
@@ -118,7 +120,7 @@ export default function ProductVariableForm({ shopId, initialValues }: IProps) {
                     <div className="mt-5 col-span-2">
                       <Label>{t("form:input-label-attribute-value")}*</Label>
                       <SelectInput
-                        isMulti={true}
+                        isMulti={false}
                         name={`variations[${index}].value`}
                         control={control}
                         defaultValue={field.value}
@@ -137,7 +139,8 @@ export default function ProductVariableForm({ shopId, initialValues }: IProps) {
 
           <div className="px-5 md:px-8">
             <Button
-              disabled={fields.length === attributes?.length}
+              disabled={fields.length > 8}
+              // disabled={fields.length === attributes?.length}
               onClick={(e: any) => {
                 e.preventDefault();
                 append({ attribute: "", value: [] });
