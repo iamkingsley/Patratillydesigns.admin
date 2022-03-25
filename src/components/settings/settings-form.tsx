@@ -69,19 +69,19 @@ type FormValues = {
 
 const socialIcon = [
   {
-    value: "FacebookIcon",
+    value: "facebook",
     label: "Facebook",
   },
   {
-    value: "InstagramIcon",
+    value: "instagram",
     label: "Instagram",
   },
   {
-    value: "TwitterIcon",
+    value: "twitter",
     label: "Twitter",
   },
   {
-    value: "YouTubeIcon",
+    value: "youtube",
     label: "Youtube",
   },
 ];
@@ -130,15 +130,15 @@ export default function SettingsForm({
     resolver: yupResolver(settingsValidationSchema),
     defaultValues: {
       ...settings,
-      // contactDetails: {
-      //   ...settings?.contactDetails,
-      //   socials: settings?.contactDetails?.socials
-      //     ? settings?.contactDetails?.socials.map((social: any) => ({
-      //         icon: updatedIcons?.find((icon) => icon?.value === social?.icon),
-      //         url: social?.url,
-      //       }))
-      //     : [],
-      // },
+      contactDetails: {
+        ...settings?.contactDetails,
+        socials: settings?.contactDetails?.socials
+          ? settings?.contactDetails?.socials.map((social: any) => ({
+            icon: updatedIcons?.find((icon) => icon?.value === social?.icon),
+            url: social?.url,
+          }))
+          : [],
+      },
       // deliveryTime: settings?.deliveryTime ? settings?.deliveryTime : [],
       // logo: settings?.logo ?? "",
       currency: settings?.currency
@@ -151,8 +151,8 @@ export default function SettingsForm({
       // // @ts-ignore
       shippingClass: !!shippingClasses?.length
         ? shippingClasses?.find(
-            (shipping: Shipping) => shipping.id == settings?.shippingClass
-          )
+          (shipping: Shipping) => shipping.id == settings?.shippingClass
+        )
         : "",
       aboutUs: settings?.aboutUs ? settings.aboutUs : "",
     },
@@ -175,12 +175,12 @@ export default function SettingsForm({
   async function onSubmit(values: FormValues) {
     const contactDetails = {
       ...values?.contactDetails,
-      location: { ...omit(values?.contactDetails?.location, "__typename") },
+      location: values?.contactDetails?.location,
       socials: values?.contactDetails?.socials
         ? values?.contactDetails?.socials?.map((social: any) => ({
-            icon: social?.icon?.value,
-            url: social?.url,
-          }))
+          icon: social?.icon?.value,
+          url: social?.url,
+        }))
         : [],
     };
     if (data.id) {
@@ -414,10 +414,10 @@ export default function SettingsForm({
         />
 
         <Card className="w-full sm:w-8/12 md:w-2/3">
-          <RichTextEditor 
-            name="aboutUs" 
-            control={control} 
-            // rules={{required: true}}
+          <RichTextEditor
+            name="aboutUs"
+            control={control}
+          // rules={{required: true}}
           />
         </Card>
       </div>
@@ -495,16 +495,12 @@ export default function SettingsForm({
 
         <Card className="w-full sm:w-8/12 md:w-2/3">
           <div className="mb-5">
-            <Label>{t("form:input-label-autocomplete")}</Label>
-            <Controller
-              control={control}
-              name="contactDetails.location"
-              render={({ field: { onChange } }) => (
-                <GooglePlacesAutocomplete
-                  onChange={onChange}
-                  data={getValues("contactDetails.location")!}
-                />
-              )}
+            <Input
+              label={t("form:input-label-autocomplete")}
+              {...register("contactDetails.location")}
+              variant="outline"
+              className="mb-5"
+              error={t(errors.contactDetails?.location?.message!)}
             />
           </div>
           <Input

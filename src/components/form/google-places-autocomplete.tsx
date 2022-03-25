@@ -16,7 +16,8 @@ export default function GooglePlacesAutocomplete({
   const { t } = useTranslation();
   const { isLoaded, loadError } = useJsApiLoader({
     id: "google_map_autocomplete",
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY!,
+    // googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY!,
+    googleMapsApiKey: 'AIzaSyCLtuUDUEOrUfYaBFlM2DZRJmdNZm3yNCU',
     libraries,
   });
 

@@ -985,7 +985,7 @@ export declare type ContactDetails = {
 export declare type ContactDetailsInput = {
   socials?: Maybe<Array<Maybe<ShopSocialInput>>>;
   contact?: Maybe<Scalars["String"]>;
-  location?: Maybe<LocationInput>;
+  location?: Maybe<Scalars["String"]>;
   website?: Maybe<Scalars["String"]>;
 };
 
