@@ -62,10 +62,11 @@ export default function ProductVariableForm({ shopId, initialValues }: IProps) {
     control,
     name: "variations",
   });
-  console.log('fields: ', fields)
+
   const cartesianProduct = getCartesianProduct(getValues("variations"));
   const variations = watch("variations");
   const attributes = data?.attributes;
+
   return (
     <div className="flex flex-wrap my-5 sm:my-8">
       <Description
@@ -111,8 +112,7 @@ export default function ProductVariableForm({ shopId, initialValues }: IProps) {
                         defaultValue={field.attribute}
                         getOptionLabel={(option: any) => option.name}
                         getOptionValue={(option: any) => option.id}
-                        options={attributes}
-                        // options={filteredAttributes(attributes, variations)!}
+                        options={filteredAttributes(attributes, variations)!}
                         isLoading={isLoading}
                       />
                     </div>
@@ -139,8 +139,7 @@ export default function ProductVariableForm({ shopId, initialValues }: IProps) {
 
           <div className="px-5 md:px-8">
             <Button
-              disabled={fields.length > 8}
-              // disabled={fields.length === attributes?.length}
+              disabled={fields.length === attributes?.length}
               onClick={(e: any) => {
                 e.preventDefault();
                 append({ attribute: "", value: [] });
