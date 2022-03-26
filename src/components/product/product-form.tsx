@@ -27,7 +27,7 @@ import {
   AttachmentInput,
   ProductStatus,
   Product,
-  // VariationOption,
+  VariationOption,
   Tag,
 } from "@ts-types/generated";
 import { useCreateProductMutation } from "@data/product/product-create.mutation";
@@ -265,18 +265,18 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
         // ),
       }),
       ...(productTypeValue?.value === ProductType.Variable && {
-        variation_options: values.variation_options,
-        // variation_options: values?.variation_options?.map(
-        //   ({ options, ...rest }: any) => ({
-        //     ...rest,
-        //     options: processOptions(options).map(
-        //       ({ name, value }: VariationOption) => ({
-        //         name,
-        //         value,
-        //       })
-        //     ),
-        //   })
-        // )
+        // variation_options: values.variation_options,
+        variation_options: values?.variation_options?.map(
+          ({ options, ...rest }: any) => ({
+            ...rest,
+            options: processOptions(options).map(
+              ({ name, value }: VariationOption) => ({
+                value: name,
+                meta: value,
+              })
+            ),
+          })
+        )
       }),
       ...calculateMaxMinPrice(values?.variation_options),
     };
