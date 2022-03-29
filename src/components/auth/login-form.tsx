@@ -67,7 +67,7 @@ const LoginForm = () => {
             setErrorMsg("form:error-credential-wrong");
           }
         },
-        onError: (error) => {console.log('Error: ', error)},
+        onError: (error) => { console.log('Error: ', error) },
       }
     );
   }
