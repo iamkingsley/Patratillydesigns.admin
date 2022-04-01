@@ -12,13 +12,10 @@ export default function FileManager() {
     const { mutate: deleteFile } = useDeleteFileMutation();
 
     const handleFileDelete = (public_id: string) => {
-        const newPublic_id = transform(public_id)
+        const newPublic_id = public_id.replace(/\//g, '-');
         deleteFile(newPublic_id);
     }
 
-    const transform = (public_id: string) => {
-        return public_id.replace(/\//g, '-');
-    }
     return (
         <div>
             <FileList files={data?.data} handleFileDelete={handleFileDelete} />
