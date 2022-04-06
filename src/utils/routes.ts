@@ -24,4 +24,5 @@ export const ROUTES = {
   LOGOUT: "/logout",
   STAFFS: "/staffs",
   REFUNDS: "/refunds",
+  FILE_MANAGER: "/file-manager",
 };

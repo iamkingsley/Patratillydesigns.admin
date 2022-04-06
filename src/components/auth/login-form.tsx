@@ -14,18 +14,18 @@ import Link from "@components/ui/link";
 import { allowedRoles, hasAccess, setAuthCredentials } from "@utils/auth-utils";
 
 type FormValues = {
-  email: string;
+  username: string;
   password: string;
 };
 const loginFormSchema = yup.object().shape({
-  email: yup
+  username: yup
     .string()
-    .email("form:error-email-format")
+    // .email("form:error-email-format")
     .required("form:error-email-required"),
   password: yup.string().required("form:error-password-required"),
 });
 const defaultValues = {
-  email: "",
+  username: "",
   password: "",
 };
 
@@ -45,11 +45,11 @@ const LoginForm = () => {
   });
   const router = useRouter();
 
-  function onSubmit({ email, password }: FormValues) {
+  function onSubmit({ username, password }: FormValues) {
     login(
       {
         variables: {
-          email,
+          username,
           password,
         },
       },
@@ -67,7 +67,7 @@ const LoginForm = () => {
             setErrorMsg("form:error-credential-wrong");
           }
         },
-        onError: (error) => {console.log('Error: ', error)},
+        onError: (error) => { console.log('Error: ', error) },
       }
     );
   }
@@ -75,12 +75,12 @@ const LoginForm = () => {
     <>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <Input
-          label={t("form:input-label-email")}
-          {...register("email")}
-          type="email"
+          label={t("form:input-label-username")}
+          {...register("username")}
+          type="text"
           variant="outline"
           className="mb-4"
-          error={t(errors?.email?.message!)}
+          error={t(errors?.username?.message!)}
         />
         <PasswordInput
           label={t("form:input-label-password")}

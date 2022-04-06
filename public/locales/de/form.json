@@ -45,7 +45,7 @@
   "item-description-add": "Hinzufügen",
   "product-description-help-text": "Ihre Produktbeschreibung und die notwendigen Informationen finden Sie hier",
   "input-label-logo": "Logo",
-  "input-label-email": "Email",
+  "input-label-username": "Email",
   "input-label-token": "Legen Sie Ihren Token ab, den Sie per E-Mail erhalten haben",
   "input-label-password": "Passwort",
   "input-label-bio": "Bio",

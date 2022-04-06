@@ -116,6 +116,11 @@ export const siteSettings = {
         label: "sidebar-nav-item-settings",
         icon: "SettingsIcon",
       },
+      {
+        href: ROUTES.FILE_MANAGER,
+        label: "sidebar-nav-item-file-manager",
+        icon: "",
+      },
     ],
     shop: [
       {

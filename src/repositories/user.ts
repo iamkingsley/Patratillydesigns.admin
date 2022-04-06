@@ -1,7 +1,7 @@
 import {
   UpdateUser,
   CreateUser,
-  LoginInput,
+  // LoginInput,
   RegisterInput,
   ChangePasswordInput,
   ForgetPasswordInput,
@@ -11,6 +11,10 @@ import {
 import http from "@utils/api/http";
 import Base from "./base";
 
+export type LoginInput = {
+  username: string;
+  password: string;
+}
 class User extends Base<CreateUser, UpdateUser> {
   me = async (url: string) => {
     return this.http(url, "get");
