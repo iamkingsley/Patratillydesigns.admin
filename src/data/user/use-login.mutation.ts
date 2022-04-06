@@ -1,6 +1,6 @@
-import { LoginInput } from "@ts-types/generated";
+// import { LoginInput } from "@ts-types/generated";
 import { useMutation } from "react-query";
-import User from "@repositories/user";
+import User, { LoginInput } from "@repositories/user";
 import { API_ENDPOINTS } from "@utils/api/endpoints";
 
 export interface ILoginVariables {

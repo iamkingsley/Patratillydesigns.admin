@@ -45,7 +45,7 @@
   "item-description-add": "يضيف",
   "product-description-help-text": "وصف المنتج والمعلومات الضرورية من هنا",
   "input-label-logo": "شعار",
-  "input-label-email": "بريد إلكتروني",
+  "input-label-username": "بريد إلكتروني",
   "input-label-token": "ضع الرمز المميز الذي حصلت عليه من البريد الإلكتروني",
   "input-label-password": "كلمه السر",
   "input-label-bio": "السيرة الذاتية",
