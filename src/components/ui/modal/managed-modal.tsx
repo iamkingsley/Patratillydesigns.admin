@@ -55,7 +55,7 @@ const ProductOptionsView = dynamic(
   () => import("@components/product/product-variable-form-modal")
 );
 
-const FileManager = dynamic(
+const FileManagerView = dynamic(
   () => import("../../../pages/file-manager/index")
 );
 
@@ -83,7 +83,7 @@ const ManagedModal = () => {
       {view === "REFUND_IMAGE_POPOVER" && <RefundImageModal />}
       {view === "EXPORT_IMPORT_PRODUCT" && <ExportImportView />}
       {view === "EXPORT_IMPORT_ATTRIBUTE" && <AttributeExportImport />}
-      {view === "FILE_MANAGER_VIEW" && <FileManager />}
+      {view === "FILE_MANAGER_VIEW" && <FileManagerView />}
     </Modal>
   );
 };

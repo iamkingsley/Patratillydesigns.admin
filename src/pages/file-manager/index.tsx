@@ -17,7 +17,7 @@ export default function FileManager() {
     }
 
     return (
-        <div>
+        <div className="bg-white p-10">
             <FileList files={data?.data} handleFileDelete={handleFileDelete} />
         </div>
     )

@@ -41,6 +41,7 @@ import { animateScroll } from "react-scroll";
 import { useModalAction } from "@components/ui/modal/modal.context";
 import { CloseIcon } from "@components/icons/close-icon";
 import { isObject } from "lodash";
+import { useFilesQuery } from "@data/file-manager/use-files.query";
 
 type Variation = {
   formName: number;
@@ -156,6 +157,9 @@ function calculateQuantity(variationOptions: any) {
   );
 }
 export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
+  const { data } = useFilesQuery();
+  const files = data?.data
+
   useEffect(() => {
     if (initialValues?.variations) {
       setValue('variations', initialValues?.variations as any)
@@ -358,7 +362,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
                     e.stopPropagation();
                     openModal("FILE_MANAGER_VIEW", {
                       files: files,
-                      handleFileDelete: handleFileDelete,
+                      // handleFileDelete: handleFileDelete,
                       setValue,
                       getValues,
                     });
@@ -404,8 +408,8 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
             <Description
               title={t("form:item-description")}
               details={`${initialValues
-                  ? t("form:item-description-edit")
-                  : t("form:item-description-add")
+                ? t("form:item-description-edit")
+                : t("form:item-description-add")
                 } ${t("form:product-description-help-text")}`}
               className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8"
             />
@@ -489,8 +493,8 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
               <Description
                 title={t("form:form-title-variation-product-info")}
                 details={`${initialValues
-                    ? t("form:item-description-update")
-                    : t("form:item-description-choose")
+                  ? t("form:item-description-update")
+                  : t("form:item-description-choose")
                   } ${t("form:form-description-variation-product-info")}`}
                 className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8"
               />
