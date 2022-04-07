@@ -284,47 +284,48 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
       }),
       ...calculateMaxMinPrice(values?.variation_options),
     };
-    if (initialValues) {
-      updateProduct(
-        {
-          variables: {
-            id: initialValues.slug,
-            input: inputValues,
-          },
-        },
-        {
-          onError: (error: any) => {
-            Object.keys(error?.response?.data).forEach((field: any) => {
-              setError(field, {
-                type: "manual",
-                message: error?.response?.data[field][0],
-              });
-            });
-          },
-        }
-      );
-    } else {
-      createProduct(
-        {
-          ...inputValues,
-        },
-        {
-          onError: (error: any) => {
-            if (error?.response?.data?.message) {
-              setErrorMessage(error?.response?.data?.message);
-              animateScroll.scrollToTop();
-            } else {
-              Object.keys(error?.response?.data).forEach((field: any) => {
-                setError(field, {
-                  type: "manual",
-                  message: error?.response?.data[field][0],
-                });
-              });
-            }
-          },
-        }
-      );
-    }
+    console.log("inputValues", inputValues);
+    // if (initialValues) {
+    //   updateProduct(
+    //     {
+    //       variables: {
+    //         id: initialValues.slug,
+    //         input: inputValues,
+    //       },
+    //     },
+    //     {
+    //       onError: (error: any) => {
+    //         Object.keys(error?.response?.data).forEach((field: any) => {
+    //           setError(field, {
+    //             type: "manual",
+    //             message: error?.response?.data[field][0],
+    //           });
+    //         });
+    //       },
+    //     }
+    //   );
+    // } else {
+    //   createProduct(
+    //     {
+    //       ...inputValues,
+    //     },
+    //     {
+    //       onError: (error: any) => {
+    //         if (error?.response?.data?.message) {
+    //           setErrorMessage(error?.response?.data?.message);
+    //           animateScroll.scrollToTop();
+    //         } else {
+    //           Object.keys(error?.response?.data).forEach((field: any) => {
+    //             setError(field, {
+    //               type: "manual",
+    //               message: error?.response?.data[field][0],
+    //             });
+    //           });
+    //         }
+    //       },
+    //     }
+    //   );
+    // }
   };
   const productTypeValue = watch("productTypeValue");
   let variations = watch("variations");

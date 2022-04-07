@@ -5,9 +5,12 @@ import { useFilesQuery } from '@data/file-manager/use-files.query';
 import useDeleteFileMutation from '@data/file-manager/use-file-delete.mutation';
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { adminOnly } from '@utils/auth-utils';
+import { useModalState } from '@components/ui/modal/modal.context';
 
 export default function FileManager() {
     const { data } = useFilesQuery();
+    const { data: value } = useModalState();
+    console.log("setV", value)
 
     const { mutate: deleteFile } = useDeleteFileMutation();
 
@@ -18,7 +21,7 @@ export default function FileManager() {
 
     return (
         <div className="bg-white p-10">
-            <FileList files={data?.data} handleFileDelete={handleFileDelete} />
+            <FileList files={data?.data} handleFileDelete={handleFileDelete} setValue={value?.setValue ? value?.setValue : null} />
         </div>
     )
 }

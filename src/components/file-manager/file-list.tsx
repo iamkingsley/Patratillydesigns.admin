@@ -3,7 +3,7 @@ import Image from 'next/image'
 import TrashIcon from "@components/icons/trash"
 import FileManagerForm from './file-manager-form'
 
-function FileList({ files, handleFileDelete }) {
+function FileList({ files, handleFileDelete, setValue }) {
     if (!files) {
         return <div>No files</div>
     }
@@ -20,6 +20,12 @@ function FileList({ files, handleFileDelete }) {
                             <TrashIcon className='text-red-700 w-5 h-5 hover:cursor-pointer'
                                 onClick={() => handleFileDelete(file?.public_id)} />
                         </div>
+                        {setValue &&
+                            <div className="absolute top-1 left-0">
+                                <input type="checkbox" className=" checked:bg-blue-500 hover:cursor-pointer"
+                                    onChange={setValue ? setValue("image", file) : ""} />
+                            </div>
+                        }
                     </div>
                 ))}
             </div>
