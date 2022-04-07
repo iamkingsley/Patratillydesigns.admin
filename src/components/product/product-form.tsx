@@ -141,7 +141,7 @@ function calculateMaxMinPrice(variationOptions: any) {
   return {
     min_price:
       sortedVariationsBySalePrice?.[0].sale_price <
-      sortedVariationsByPrice?.[0]?.price
+        sortedVariationsByPrice?.[0]?.price
         ? Number(sortedVariationsBySalePrice?.[0].sale_price)
         : Number(sortedVariationsByPrice?.[0]?.price),
     max_price: Number(
@@ -162,7 +162,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
       setValue('variation_options', initialValues?.variation_options)
     }
   }, [initialValues])
-  
+
   const router = useRouter();
   const { openModal } = useModalAction();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -178,20 +178,20 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
     //@ts-ignore
     defaultValues: initialValues
       ? cloneDeep({
-          ...initialValues,
-          // type: initialValues?.type,
-          isVariation:
-            initialValues.variations?.length &&
+        ...initialValues,
+        // type: initialValues?.type,
+        isVariation:
+          initialValues.variations?.length &&
             initialValues.variation_options?.length
-              ? true
-              : false,
-          productTypeValue: initialValues.product_type
-            ? productType.find(
-                (type) => initialValues.product_type === type.value
-              )
-            : productType[0],
-          variations: getFormattedVariations(initialValues?.variations),
-        })
+            ? true
+            : false,
+        productTypeValue: initialValues.product_type
+          ? productType.find(
+            (type) => initialValues.product_type === type.value
+          )
+          : productType[0],
+        variations: getFormattedVariations(initialValues?.variations),
+      })
       : defaultValues,
   });
   const {
@@ -351,6 +351,22 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
             />
 
             <Card className="w-full sm:w-8/12 md:w-2/3">
+              <Card className="w-full sm:w-8/12 md:w-2/3">
+                <div
+                  onClick={(e: any) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openModal("FILE_MANAGER_VIEW", {
+                      files: files,
+                      handleFileDelete: handleFileDelete,
+                      setValue,
+                      getValues,
+                    });
+                  }}              >
+                  {t("form:button-label-add-option")}
+                </div>
+                <FileInput name="image" control={control} multiple={false} />
+              </Card>
               <FileInput name="image" control={control} multiple={false} />
             </Card>
           </div>
@@ -387,11 +403,10 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
           <div className="flex flex-wrap my-5 sm:my-8">
             <Description
               title={t("form:item-description")}
-              details={`${
-                initialValues
+              details={`${initialValues
                   ? t("form:item-description-edit")
                   : t("form:item-description-add")
-              } ${t("form:product-description-help-text")}`}
+                } ${t("form:product-description-help-text")}`}
               className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8"
             />
 
@@ -473,11 +488,10 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
             <div className="flex flex-wrap my-5 sm:my-8">
               <Description
                 title={t("form:form-title-variation-product-info")}
-                details={`${
-                  initialValues
+                details={`${initialValues
                     ? t("form:item-description-update")
                     : t("form:item-description-choose")
-                } ${t("form:form-description-variation-product-info")}`}
+                  } ${t("form:form-description-variation-product-info")}`}
                 className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8"
               />
               <Card className="w-full sm:w-8/12 md:w-2/3">
