@@ -18,7 +18,7 @@ const fetchProducts = async ({ queryKey }: QueryParamsType) => {
     status,
     limit = 15,
     orderBy = "updated_at",
-    sortedBy = "DESC",
+    sortedBy = "desc",
   } = params as ProductsQueryOptionsType;
   const searchString = stringifySearchQuery({
     name: text,

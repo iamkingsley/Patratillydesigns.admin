@@ -23,11 +23,9 @@ export default function ProductsPage() {
   const [category, setCategory] = useState("");
   const [page, setPage] = useState(1);
   const { t } = useTranslation();
-  const [orderBy, setOrder] = useState("created_at");
+  const [orderBy, setOrder] = useState("updated_at");
   const [sortedBy, setColumn] = useState<SortOrder>(SortOrder.Desc);
   const [visible, setVisible] = useState(false);
-
-  console.log(sortedBy);
 
   const toggleVisible = () => {
     setVisible((v) => !v);
@@ -46,7 +44,6 @@ export default function ProductsPage() {
     orderBy,
     sortedBy,
   });
-  console.log('/admin/products', data)
   if (loading) return <Loader text={t("common:text-loading")} />;
   if (error) return <ErrorMessage message={error.message} />;
 

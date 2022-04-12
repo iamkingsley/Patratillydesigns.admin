@@ -34,7 +34,7 @@ export default function CategoryTypeFilter({
         className
       )}
     >
-      <div className="w-full">
+      {/* <div className="w-full">
         <Label>{t("common:filter-by-group")}</Label>
         <Select
           options={data?.types}
@@ -44,8 +44,9 @@ export default function CategoryTypeFilter({
           placeholder={t("common:filter-by-group-placeholder")}
           onChange={onTypeFilter}
         />
-      </div>
-      <div className="w-full">
+      </div> */}
+      {/* <div className="w-full"> */}
+      <div className="w-50">
         <Label>{t("common:filter-by-category")}</Label>
         <Select
           options={categoryData?.categories?.data}
