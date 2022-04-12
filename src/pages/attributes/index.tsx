@@ -18,14 +18,19 @@ export default function AttributePage() {
   const [type, setType] = useState("");
   const [page, setPage] = useState(1);
   const { t } = useTranslation();
-  const [orderBy, setOrder] = useState("created_at");
+  const [orderBy, setOrder] = useState("updated_at");
   const [sortedBy, setColumn] = useState<SortOrder>(SortOrder.Desc);
 
   const {
     data,
     isLoading: loading,
     error,
-  } = useAttributesQuery({ orderBy, sortedBy });
+  } = useAttributesQuery({
+    text: searchTerm,
+    page,
+    orderBy,
+    sortedBy,
+  });
 
   if (loading) return <Loader text={t("common:text-loading")} />;
   if (error) return <ErrorMessage message={error.message} />;
@@ -46,10 +51,11 @@ export default function AttributePage() {
           </h1>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center w-full md:w-3/4 xl:w-2/4 ms-auto">
+        <div className="w-full md:w-3/4 flex items-center ms-auto">
+          <Search onSearch={handleSearch} />
           <LinkButton
             href={`/attributes/create`}
-            className="h-12 mt-5 md:mt-0 md:ms-auto w-full md:w-auto"
+            className="h-12 ms-4 md:ms-6"
           >
             <span>
               + {t("form:button-label-add")} {t("common:attribute")}

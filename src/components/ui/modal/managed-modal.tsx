@@ -1,5 +1,6 @@
 import Modal from "@components/ui/modal/modal";
 import dynamic from "next/dynamic";
+import FileManager from "src/pages/file-manager";
 import { useModalAction, useModalState } from "./modal.context";
 const TagDeleteView = dynamic(() => import("@components/tag/tag-delete-view"));
 const TaxDeleteView = dynamic(() => import("@components/tax/tax-delete-view"));
@@ -54,6 +55,10 @@ const ProductOptionsView = dynamic(
   () => import("@components/product/product-variable-form-modal")
 );
 
+const FileManagerView = dynamic(
+  () => import("../../../pages/file-manager/index")
+);
+
 const ManagedModal = () => {
   const { isOpen, view } = useModalState();
   const { closeModal } = useModalAction();
@@ -78,6 +83,7 @@ const ManagedModal = () => {
       {view === "REFUND_IMAGE_POPOVER" && <RefundImageModal />}
       {view === "EXPORT_IMPORT_PRODUCT" && <ExportImportView />}
       {view === "EXPORT_IMPORT_ATTRIBUTE" && <AttributeExportImport />}
+      {view === "FILE_MANAGER_VIEW" && <FileManagerView />}
     </Modal>
   );
 };

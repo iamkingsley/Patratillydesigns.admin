@@ -8,7 +8,6 @@ import Label from "@components/ui/label";
 import Radio from "@components/ui/radio/radio";
 import { useRouter } from "next/router";
 import { yupResolver } from "@hookform/resolvers/yup";
-import FileInput from "@components/ui/file-input";
 import Checkbox from "@components/ui/checkbox/checkbox";
 import { productValidationSchema } from "./product-validation-schema";
 import groupBy from "lodash/groupBy";
@@ -41,6 +40,7 @@ import { animateScroll } from "react-scroll";
 import { useModalAction } from "@components/ui/modal/modal.context";
 import { CloseIcon } from "@components/icons/close-icon";
 import { isObject } from "lodash";
+import { useFilesQuery } from "@data/file-manager/use-files.query";
 
 type Variation = {
   formName: number;
@@ -141,7 +141,7 @@ function calculateMaxMinPrice(variationOptions: any) {
   return {
     min_price:
       sortedVariationsBySalePrice?.[0].sale_price <
-      sortedVariationsByPrice?.[0]?.price
+        sortedVariationsByPrice?.[0]?.price
         ? Number(sortedVariationsBySalePrice?.[0].sale_price)
         : Number(sortedVariationsByPrice?.[0]?.price),
     max_price: Number(
@@ -156,13 +156,16 @@ function calculateQuantity(variationOptions: any) {
   );
 }
 export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
+  const { data } = useFilesQuery();
+  const files = data?.data
+
   useEffect(() => {
     if (initialValues?.variations) {
       setValue('variations', initialValues?.variations as any)
       setValue('variation_options', initialValues?.variation_options)
     }
   }, [initialValues])
-  
+
   const router = useRouter();
   const { openModal } = useModalAction();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -178,20 +181,20 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
     //@ts-ignore
     defaultValues: initialValues
       ? cloneDeep({
-          ...initialValues,
-          // type: initialValues?.type,
-          isVariation:
-            initialValues.variations?.length &&
+        ...initialValues,
+        // type: initialValues?.type,
+        isVariation:
+          initialValues.variations?.length &&
             initialValues.variation_options?.length
-              ? true
-              : false,
-          productTypeValue: initialValues.product_type
-            ? productType.find(
-                (type) => initialValues.product_type === type.value
-              )
-            : productType[0],
-          variations: getFormattedVariations(initialValues?.variations),
-        })
+            ? true
+            : false,
+        productTypeValue: initialValues.product_type
+          ? productType.find(
+            (type) => initialValues.product_type === type.value
+          )
+          : productType[0],
+        variations: getFormattedVariations(initialValues?.variations),
+      })
       : defaultValues,
   });
   const {
@@ -351,11 +354,25 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
             />
 
             <Card className="w-full sm:w-8/12 md:w-2/3">
-              <FileInput name="image" control={control} multiple={false} />
+              <div className="border-dashed border-2 border-border-base h-36 rounded flex flex-col justify-center items-center cursor-pointer focus:border-accent-400 focus:outline-none"
+                onClick={(e: any) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  openModal("FILE_MANAGER_VIEW", {
+                    files: files,
+                    setValue,
+                    getValues,
+                  });
+                }} >
+                <span className="text-accent font-semibold">
+                  {t("text-upload-highlight")}
+                </span>{" "}
+                {t("text-upload-message")} <br />
+              </div>
             </Card>
           </div>
 
-          <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
+          {/* <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
             <Description
               title={t("form:gallery-title")}
               details={t("form:gallery-help-text")}
@@ -365,7 +382,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
             <Card className="w-full sm:w-8/12 md:w-2/3">
               <FileInput name="gallery" control={control} />
             </Card>
-          </div>
+          </div> */}
 
           <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
             <Description
@@ -387,11 +404,10 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
           <div className="flex flex-wrap my-5 sm:my-8">
             <Description
               title={t("form:item-description")}
-              details={`${
-                initialValues
-                  ? t("form:item-description-edit")
-                  : t("form:item-description-add")
-              } ${t("form:product-description-help-text")}`}
+              details={`${initialValues
+                ? t("form:item-description-edit")
+                : t("form:item-description-add")
+                } ${t("form:product-description-help-text")}`}
               className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8"
             />
 
@@ -473,11 +489,10 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
             <div className="flex flex-wrap my-5 sm:my-8">
               <Description
                 title={t("form:form-title-variation-product-info")}
-                details={`${
-                  initialValues
-                    ? t("form:item-description-update")
-                    : t("form:item-description-choose")
-                } ${t("form:form-description-variation-product-info")}`}
+                details={`${initialValues
+                  ? t("form:item-description-update")
+                  : t("form:item-description-choose")
+                  } ${t("form:form-description-variation-product-info")}`}
                 className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8"
               />
               <Card className="w-full sm:w-8/12 md:w-2/3">
