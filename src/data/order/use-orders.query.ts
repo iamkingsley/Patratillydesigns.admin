@@ -12,7 +12,7 @@ const fetchOrders = async ({ queryKey }: QueryParamsType) => {
     page = 1,
     limit = 20,
     orderBy = "updated_at",
-    sortedBy = "DESC",
+    sortedBy = "desc",
   } = params as QueryOptionsType;
   const searchString = stringifySearchQuery({
     tracking_number: text,
