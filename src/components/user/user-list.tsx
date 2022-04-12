@@ -75,12 +75,12 @@ const CustomerList = ({ customers, onPagination, onSort, onOrder }: IProps) => {
       key: "email",
       align: alignLeft,
     },
-    {
-      title: t("table:table-item-available_wallet_points"),
-      dataIndex: ["wallet", "available_points"],
-      key: "available_wallet_points",
-      align: alignLeft,
-    },
+    // {
+    //   title: t("table:table-item-available_wallet_points"),
+    //   dataIndex: ["wallet", "available_points"],
+    //   key: "available_wallet_points",
+    //   align: alignLeft,
+    // },
     {
       title: (
         <TitleWithSort
@@ -113,7 +113,7 @@ const CustomerList = ({ customers, onPagination, onSort, onOrder }: IProps) => {
                 id={id}
                 userStatus={true}
                 isUserActive={is_active}
-                showAddWalletPoints={true}
+                showAddWalletPoints={false}
               />
             )}
           </>
