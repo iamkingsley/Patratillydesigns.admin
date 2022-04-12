@@ -25,4 +25,5 @@ export const ROUTES = {
   STAFFS: "/staffs",
   REFUNDS: "/refunds",
   FILE_MANAGER: "/file-manager",
+  GALLERY: "/gallery",
 };
