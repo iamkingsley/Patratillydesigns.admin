@@ -8,7 +8,6 @@ import Label from "@components/ui/label";
 import Radio from "@components/ui/radio/radio";
 import { useRouter } from "next/router";
 import { yupResolver } from "@hookform/resolvers/yup";
-import FileInput from "@components/ui/file-input";
 import Checkbox from "@components/ui/checkbox/checkbox";
 import { productValidationSchema } from "./product-validation-schema";
 import groupBy from "lodash/groupBy";
@@ -284,48 +283,47 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
       }),
       ...calculateMaxMinPrice(values?.variation_options),
     };
-    console.log("inputValues", inputValues);
-    // if (initialValues) {
-    //   updateProduct(
-    //     {
-    //       variables: {
-    //         id: initialValues.slug,
-    //         input: inputValues,
-    //       },
-    //     },
-    //     {
-    //       onError: (error: any) => {
-    //         Object.keys(error?.response?.data).forEach((field: any) => {
-    //           setError(field, {
-    //             type: "manual",
-    //             message: error?.response?.data[field][0],
-    //           });
-    //         });
-    //       },
-    //     }
-    //   );
-    // } else {
-    //   createProduct(
-    //     {
-    //       ...inputValues,
-    //     },
-    //     {
-    //       onError: (error: any) => {
-    //         if (error?.response?.data?.message) {
-    //           setErrorMessage(error?.response?.data?.message);
-    //           animateScroll.scrollToTop();
-    //         } else {
-    //           Object.keys(error?.response?.data).forEach((field: any) => {
-    //             setError(field, {
-    //               type: "manual",
-    //               message: error?.response?.data[field][0],
-    //             });
-    //           });
-    //         }
-    //       },
-    //     }
-    //   );
-    // }
+    if (initialValues) {
+      updateProduct(
+        {
+          variables: {
+            id: initialValues.slug,
+            input: inputValues,
+          },
+        },
+        {
+          onError: (error: any) => {
+            Object.keys(error?.response?.data).forEach((field: any) => {
+              setError(field, {
+                type: "manual",
+                message: error?.response?.data[field][0],
+              });
+            });
+          },
+        }
+      );
+    } else {
+      createProduct(
+        {
+          ...inputValues,
+        },
+        {
+          onError: (error: any) => {
+            if (error?.response?.data?.message) {
+              setErrorMessage(error?.response?.data?.message);
+              animateScroll.scrollToTop();
+            } else {
+              Object.keys(error?.response?.data).forEach((field: any) => {
+                setError(field, {
+                  type: "manual",
+                  message: error?.response?.data[field][0],
+                });
+              });
+            }
+          },
+        }
+      );
+    }
   };
   const productTypeValue = watch("productTypeValue");
   let variations = watch("variations");
@@ -356,27 +354,25 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
             />
 
             <Card className="w-full sm:w-8/12 md:w-2/3">
-              <Card className="w-full sm:w-8/12 md:w-2/3">
-                <div
-                  onClick={(e: any) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    openModal("FILE_MANAGER_VIEW", {
-                      files: files,
-                      // handleFileDelete: handleFileDelete,
-                      setValue,
-                      getValues,
-                    });
-                  }}              >
-                  {t("form:button-label-add-option")}
-                </div>
-                <FileInput name="image" control={control} multiple={false} />
-              </Card>
-              <FileInput name="image" control={control} multiple={false} />
+              <div className="border-dashed border-2 border-border-base h-36 rounded flex flex-col justify-center items-center cursor-pointer focus:border-accent-400 focus:outline-none"
+                onClick={(e: any) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  openModal("FILE_MANAGER_VIEW", {
+                    files: files,
+                    setValue,
+                    getValues,
+                  });
+                }} >
+                <span className="text-accent font-semibold">
+                  {t("text-upload-highlight")}
+                </span>{" "}
+                {t("text-upload-message")} <br />
+              </div>
             </Card>
           </div>
 
-          <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
+          {/* <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
             <Description
               title={t("form:gallery-title")}
               details={t("form:gallery-help-text")}
@@ -386,7 +382,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
             <Card className="w-full sm:w-8/12 md:w-2/3">
               <FileInput name="gallery" control={control} />
             </Card>
-          </div>
+          </div> */}
 
           <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
             <Description
