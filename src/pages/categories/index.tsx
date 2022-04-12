@@ -58,12 +58,12 @@ export default function Categories() {
           <div className="w-full xl:w-3/4 flex flex-col md:flex-row space-y-4 md:space-y-0 items-center ms-auto">
             <Search onSearch={handleSearch} />
 
-            <TypeFilter
+            {/* <TypeFilter
               className="md:ms-6"
               onTypeFilter={({ slug }: { slug: string }) => {
                 setType(slug);
               }}
-            />
+            /> */}
 
             <LinkButton
               href={`${ROUTES.CATEGORIES}/create`}

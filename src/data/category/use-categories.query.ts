@@ -19,7 +19,7 @@ const fetchCategories = async ({
     type,
     limit = 15,
     orderBy = "updated_at",
-    sortedBy = "DESC",
+    sortedBy = "desc",
     parent = null,
   } = params as CategoriesQueryOptionsType;
 
