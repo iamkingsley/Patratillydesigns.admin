@@ -8,13 +8,14 @@ const fetchAttributeValues = async ({ queryKey }: QueryParamsType) => {
   const [_key, params] = queryKey;
   const {
     text,
+    limit = 30,
     orderBy = "updated_at",
-    sortedBy = "DESC",
+    sortedBy = "desc",
   } = params as QueryOptionsType;
   const searchString = stringifySearchQuery({
     name: text,
   });
-  const url = `${API_ENDPOINTS.ATTRIBUTE_VALUES}?search=${searchString}&orderBy=${orderBy}&sortedBy=${sortedBy}`;
+  const url = `${API_ENDPOINTS.ATTRIBUTE_VALUES}?search=${searchString}&limit=${limit}&orderBy=${orderBy}&sortedBy=${sortedBy}`;
   const { data } = await AttributeValue.all(url);
   return { attributeValues: data };
 };
