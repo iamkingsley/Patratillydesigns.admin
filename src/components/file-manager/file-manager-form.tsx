@@ -47,7 +47,7 @@ const FileManagerForm = () => {
             <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
                 <Description
                     title={t("form:input-label-image")}
-                    details={t("form:coupon-image-helper-text")}
+                    details={t("form:featured-image-help-text")}
                     className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8"
                 />
 

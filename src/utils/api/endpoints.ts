@@ -43,4 +43,5 @@ export const API_ENDPOINTS = {
   IMPORT_ATTRIBUTES: "import-attributes/",
   IMPORT_VARIATION_OPTIONS: "import-variation-options/",
   FILE_MANAGER: "file-manager",
+  GALLERY: "gallery",
 };

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from "@components/layouts/admin";
 import FileList from "@components/file-manager/file-list";
 import { useFilesQuery } from '@data/file-manager/use-files.query';
@@ -10,9 +10,12 @@ import { useModalState } from '@components/ui/modal/modal.context';
 export default function FileManager() {
     const { data } = useFilesQuery();
     const { data: value } = useModalState();
-    console.log("setV", value)
 
     const { mutate: deleteFile } = useDeleteFileMutation();
+
+    useEffect(() => {
+
+    }, [])
 
     const handleFileDelete = (public_id: string) => {
         const newPublic_id = public_id.replace(/\//g, '-');
