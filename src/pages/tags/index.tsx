@@ -19,7 +19,7 @@ export default function Tags() {
   const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
-  const [orderBy, setOrder] = useState("created_at");
+  const [orderBy, setOrder] = useState("updated_at");
   const [sortedBy, setColumn] = useState<SortOrder>(SortOrder.Desc);
   const {
     data,
