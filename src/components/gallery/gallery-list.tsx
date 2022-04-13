@@ -122,11 +122,11 @@ const GalleryList = ({ galleries, onSort, onOrder }: any) => {
             dataIndex: "id",
             key: "actions",
             align: alignRight,
-            render: (id: string) => (
+            render: (id: string, record: any) => (
                 <ActionButtons
-                    id={id}
+                    id={record?.id}
                     // editUrl={`${router.asPath}/${id}/edit`}
-                    deleteModalView="DELETE_ATTRIBUTE"
+                    deleteModalView="DELETE_GALLERY"
                 />
             ),
         },
