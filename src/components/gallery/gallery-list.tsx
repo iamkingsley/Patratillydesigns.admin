@@ -63,16 +63,7 @@ const GalleryList = ({ galleries, onSort, onOrder }: any) => {
                 />
             ),
         },
-
-        // {
-        //   title: t("table:table-item-id"),
-        //   dataIndex: "id",
-        //   key: "id",
-        //   align: "center",
-        //   width: 60,
-        // },
         {
-            // title: t("table:table-item-title"),
             title: (
                 <TitleWithSort
                     title={t("table:table-item-title")}
@@ -89,43 +80,15 @@ const GalleryList = ({ galleries, onSort, onOrder }: any) => {
             onHeaderCell: () => onHeaderClick("nadescriptionme"),
             render: (description: any) => <span className="whitespace-nowrap">{description}</span>,
         },
-        // {
-        //   title: t("table:table-item-shop"),
-        //   dataIndex: "shop",
-        //   key: "shop",
-        //   width: 120,
-        //   align: "center",
-        //   ellipsis: true,
-        //   render: (shop: Shop) => (
-        //     <span className="whitespace-nowrap truncate">{shop?.name}</span>
-        //   ),
-        // },
-        // {
-        //     title: t("table:table-item-values"),
-        //     dataIndex: "values",
-        //     key: "values",
-        //     align: alignLeft,
-        //     render: (values: any) => {
-        //         return (
-        //             <span className="whitespace-nowrap">
-        //                 {values?.map((singleValues: any, index: number) => {
-        //                     return index > 0
-        //                         ? `, ${singleValues.value}`
-        //                         : `${singleValues.value}`;
-        //                 })}
-        //             </span>
-        //         );
-        //     },
-        // },
         {
             title: t("table:table-item-actions"),
-            dataIndex: "id",
+            dataIndex: "slug",
             key: "actions",
             align: alignRight,
-            render: (id: string, record: any) => (
+            render: (slug: string, record: any) => (
                 <ActionButtons
-                    id={record?.id}
-                    // editUrl={`${router.asPath}/${id}/edit`}
+                    id={record.id}
+                    editUrl={`${router.asPath}/${slug}/edit`}
                     deleteModalView="DELETE_GALLERY"
                 />
             ),

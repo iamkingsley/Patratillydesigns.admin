@@ -12,7 +12,7 @@ import { ROUTES } from "@utils/routes";
 import GalleryList from "@components/gallery/gallery-list";
 import { useGalleriesQuery } from "@data/gallery/use-galleries.query";
 
-export default function TypesPage() {
+export default function GalleriesPage() {
     const { t } = useTranslation();
     const [orderBy, setOrder] = useState("created_at");
     const [sortedBy, setColumn] = useState<SortOrder>(SortOrder.Desc);
@@ -26,7 +26,7 @@ export default function TypesPage() {
         orderBy,
         sortedBy,
     });
-    console.log("galleries", data)
+    console.log("/index", data);
     if (loading) return <Loader text={t("common:text-loading")} />;
     if (error) return <ErrorMessage message={error.message} />;
     function handleSearch({ searchText }: { searchText: string }) {
@@ -58,12 +58,12 @@ export default function TypesPage() {
                     </LinkButton>
                 </div>
             </Card>
-            <GalleryList galleries={data?.data} onOrder={setOrder} onSort={setColumn} />
+            <GalleryList galleries={data?.gallery} onOrder={setOrder} onSort={setColumn} />
         </>
     );
 }
 
-TypesPage.Layout = Layout;
+GalleriesPage.Layout = Layout;
 
 export const getStaticProps = async ({ locale }: any) => ({
     props: {
