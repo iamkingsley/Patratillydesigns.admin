@@ -84,6 +84,10 @@ const socialIcon = [
     value: "youtube",
     label: "Youtube",
   },
+  {
+    value: "whatsapp",
+    label: "WhatsApp",
+  },
 ];
 
 export const updatedIcons = socialIcon.map((item: any) => {

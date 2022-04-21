@@ -9,6 +9,8 @@ import Button from "@components/ui/button";
 import { useCreateGalleryMutation } from "@data/gallery/use-gallery-create.mutation";
 import router from "next/router";
 import { useUpdateGalleryMutation } from "@data/gallery/use-gallery-update";
+import { useModalAction } from "@components/ui/modal/modal.context";
+import { useFilesQuery } from "@data/file-manager/use-files.query";
 
 
 type FormValues = {
@@ -24,13 +26,19 @@ const defaultValues = {
 
 const CreateOrUpdateGalleryForm = ({ initialValues }: any) => {
 
+    const { openModal } = useModalAction();
     const { t } = useTranslation();
+    const { data } = useFilesQuery();
+    const files = data?.data
+
 
     const {
         setError,
         register,
         handleSubmit,
         control,
+        setValue,
+        getValues,
         formState: { errors },
     } = useForm<FormValues>({
         shouldUnregister: true,
@@ -87,7 +95,21 @@ const CreateOrUpdateGalleryForm = ({ initialValues }: any) => {
                 />
 
                 <Card className="w-full sm:w-8/12 md:w-2/3">
-                    <FileInput name="image" control={control} multiple={false} />
+                    <div className="border-dashed border-2 border-border-base h-36 rounded flex flex-col justify-center items-center cursor-pointer focus:border-accent-400 focus:outline-none"
+                        onClick={(e: any) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            openModal("FILE_MANAGER_VIEW", {
+                                files: files,
+                                setValue,
+                                getValues,
+                            });
+                        }} >
+                        <span className="text-accent font-semibold">
+                            {t("text-upload-highlight")}
+                        </span>{" "}
+                        {t("text-upload-message")} <br />
+                    </div>
                 </Card>
 
                 <Description

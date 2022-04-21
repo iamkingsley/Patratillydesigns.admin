@@ -16,13 +16,13 @@ const PopularProductList = ({ products, title }: IProps) => {
   const { alignLeft, alignRight } = useIsRTL();
 
   let columns = [
-    {
-      title: t("table:table-item-id"),
-      dataIndex: "id",
-      key: "id",
-      align: "center",
-      width: 64,
-    },
+    // {
+    //   title: t("table:table-item-id"),
+    //   dataIndex: "id",
+    //   key: "id",
+    //   align: "center",
+    //   width: 64,
+    // },
     {
       title: t("table:table-item-title"),
       dataIndex: "name",

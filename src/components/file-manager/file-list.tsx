@@ -2,10 +2,18 @@ import React from 'react'
 import Image from 'next/image'
 import TrashIcon from "@components/icons/trash"
 import FileManagerForm from './file-manager-form'
+import { useModalAction } from '@components/ui/modal/modal.context';
 
 function FileList({ files, handleFileDelete, setValue }) {
+    const { closeModal } = useModalAction();
+
     if (!files) {
         return <div>No files</div>
+    }
+
+    const handleFileSelect = (file: any) => {
+        setValue("image", file)
+        closeModal()
     }
 
     return (
@@ -23,7 +31,7 @@ function FileList({ files, handleFileDelete, setValue }) {
                         {setValue &&
                             <div className="absolute top-1 left-0">
                                 <input type="checkbox" className=" checked:bg-blue-500 hover:cursor-pointer"
-                                    onChange={setValue ? setValue("image", file) : ""} />
+                                    onClick={() => handleFileSelect(file)} />
                             </div>
                         }
                     </div>
