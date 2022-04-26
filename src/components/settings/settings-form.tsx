@@ -93,11 +93,11 @@ const socialIcon = [
 export const updatedIcons = socialIcon.map((item: any) => {
   item.label = (
     <div className="flex space-s-4 items-center text-body">
-      <span className="flex w-4 h-4 items-center justify-center">
+      <span className="flex w-6 h-6 items-center justify-center">
         {getIcon({
           iconList: socialIcons,
           iconName: item.value,
-          className: "w-4 h-4",
+          className: "w-6 h-6",
         })}
       </span>
       <span>{item.label}</span>
