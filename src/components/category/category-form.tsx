@@ -28,6 +28,8 @@ import SelectInput from "@components/ui/select-input";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { categoryValidationSchema } from "./category-validation-schema";
 import Checkbox from "@components/ui/checkbox/checkbox";
+import FileManagerUpload from "@components/file-manager/file-manager-upload";
+import { useFilesQuery } from "@data/file-manager/use-files.query";
 
 export const updatedIcons = categoryIcons.map((item: any) => {
   item.label = (
@@ -138,11 +140,15 @@ export default function CreateOrUpdateCategoriesForm({
 }: IProps) {
   const router = useRouter();
   const { t } = useTranslation();
+  const { data } = useFilesQuery();
+  const files = data?.data
+
   const {
     register,
     handleSubmit,
     control,
     setValue,
+    getValues,
 
     formState: { errors },
   } = useForm<FormValues>({
@@ -150,13 +156,13 @@ export default function CreateOrUpdateCategoriesForm({
     //@ts-ignore
     defaultValues: initialValues
       ? {
-          ...initialValues,
-          icon: initialValues?.icon
-            ? categoryIcons.find(
-                (singleIcon) => singleIcon.value === initialValues?.icon!
-              )
-            : "",
-        }
+        ...initialValues,
+        icon: initialValues?.icon
+          ? categoryIcons.find(
+            (singleIcon) => singleIcon.value === initialValues?.icon!
+          )
+          : "",
+      }
       : defaultValues,
     resolver: yupResolver(categoryValidationSchema),
   });
@@ -209,19 +215,33 @@ export default function CreateOrUpdateCategoriesForm({
           className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8"
         />
 
+
         <Card className="w-full sm:w-8/12 md:w-2/3">
-          <FileInput name="image" control={control} multiple={false} />
+          <div className="border-dashed border-2 border-border-base h-36 rounded flex flex-col justify-center items-center cursor-pointer focus:border-accent-400 focus:outline-none"
+            onClick={(e: any) => {
+              e.preventDefault();
+              e.stopPropagation();
+              openModal("FILE_MANAGER_VIEW", {
+                files: files,
+                setValue,
+                getValues,
+              });
+            }} >
+            <span className="text-accent font-semibold">
+              {t("text-upload-highlight")}
+            </span>{" "}
+            {t("text-upload-message")} <br />
+          </div>
         </Card>
       </div>
 
       <div className="flex flex-wrap my-5 sm:my-8">
         <Description
           title={t("form:input-label-description")}
-          details={`${
-            initialValues
-              ? t("form:item-description-edit")
-              : t("form:item-description-add")
-          } ${t("form:category-description-helper-text")}`}
+          details={`${initialValues
+            ? t("form:item-description-edit")
+            : t("form:item-description-add")
+            } ${t("form:category-description-helper-text")}`}
           className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8 "
         />
 

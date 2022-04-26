@@ -6,7 +6,7 @@ const useDeleteGalleryMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation(
-    (public_id: string) => Gallery.delete(`${API_ENDPOINTS.GALLERY}/${public_id}`),
+    (id: string) => Gallery.delete(`${API_ENDPOINTS.GALLERY}/${id}`),
     {
       // Always refetch after error or success:
       onSettled: () => {

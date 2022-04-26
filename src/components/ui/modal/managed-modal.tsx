@@ -59,6 +59,10 @@ const FileManagerView = dynamic(
   () => import("../../../pages/file-manager/index")
 );
 
+const GalleryDeleteView = dynamic(
+  () => import("@components/gallery/gallery-delete-view")
+);
+
 const ManagedModal = () => {
   const { isOpen, view } = useModalState();
   const { closeModal } = useModalAction();
@@ -84,6 +88,7 @@ const ManagedModal = () => {
       {view === "EXPORT_IMPORT_PRODUCT" && <ExportImportView />}
       {view === "EXPORT_IMPORT_ATTRIBUTE" && <AttributeExportImport />}
       {view === "FILE_MANAGER_VIEW" && <FileManagerView />}
+      {view === "DELETE_GALLERY" && <GalleryDeleteView />}
     </Modal>
   );
 };

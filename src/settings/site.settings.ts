@@ -86,21 +86,21 @@ export const siteSettings = {
         label: "sidebar-nav-item-users",
         icon: "UsersIcon",
       },
-      {
-        href: ROUTES.COUPONS,
-        label: "sidebar-nav-item-coupons",
-        icon: "CouponsIcon",
-      },
+      // {
+      //   href: ROUTES.COUPONS,
+      //   label: "sidebar-nav-item-coupons",
+      //   icon: "CouponsIcon",
+      // },
       // {
       //   href: ROUTES.TAXES,
       //   label: "sidebar-nav-item-taxes",
       //   icon: "TaxesIcon",
       // },
-      {
-        href: ROUTES.SHIPPINGS,
-        label: "sidebar-nav-item-shippings",
-        icon: "ShippingsIcon",
-      },
+      // {
+      //   href: ROUTES.SHIPPINGS,
+      //   label: "sidebar-nav-item-shippings",
+      //   icon: "ShippingsIcon",
+      // },
       // {
       //   href: ROUTES.WITHDRAWS,
       //   label: "sidebar-nav-item-withdraws",

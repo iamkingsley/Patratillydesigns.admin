@@ -1,16 +1,16 @@
 import Card from "@components/common/card";
 import Description from "@components/ui/description";
 import FileInput from "@components/ui/file-input";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { AttachmentInput } from "@ts-types/generated";
-import { adminOnly } from "@utils/auth-utils";
 import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useForm } from "react-hook-form";
-import Layout from "@components/layouts/admin";
 import TextArea from "@components/ui/text-area";
 import Button from "@components/ui/button";
 import { useCreateGalleryMutation } from "@data/gallery/use-gallery-create.mutation";
+import router from "next/router";
+import { useUpdateGalleryMutation } from "@data/gallery/use-gallery-update";
+import { useModalAction } from "@components/ui/modal/modal.context";
+import { useFilesQuery } from "@data/file-manager/use-files.query";
 
 
 type FormValues = {
@@ -22,40 +22,65 @@ const defaultValues = {
     description: ""
 };
 
-type IProps = {
-    initialValues?: AttachmentInput | null;
-    file: any
-};
 
-const CreateOrUpdateGalleryForm = () => {
 
+const CreateOrUpdateGalleryForm = ({ initialValues }: any) => {
+
+    const { openModal } = useModalAction();
     const { t } = useTranslation();
+    const { data } = useFilesQuery();
+    const files = data?.data
+
 
     const {
+        setError,
         register,
         handleSubmit,
         control,
+        setValue,
+        getValues,
         formState: { errors },
-    } = useForm({});
+    } = useForm<FormValues>({
+        shouldUnregister: true,
+        defaultValues: initialValues ? initialValues : defaultValues,
+    });
 
-    const { mutate: createGallery, isLoading: loading } =
+    const { mutate: createGallery, isLoading: creating } =
         useCreateGalleryMutation();
+    const { mutate: updateGallery, isLoading: updating } =
+        useUpdateGalleryMutation();
 
     const onSubmit = async (values: FormValues) => {
         const input = {
             description: values?.description,
-            image: {
-                thumbnail: values?.image?.thumbnail,
-                original: values?.image?.original,
-                id: values?.image?.id,
-                _id: values?.image?._id,
-            },
+            ...(values?.image ? { image: values?.image } : { image: initialValues.image }),
         }
-        createGallery({
-            variables: {
-                input,
-            },
-        });
+        if (initialValues) {
+            updateGallery(
+                {
+                    variables: {
+                        id: initialValues.slug,
+                        input: input
+                    },
+                },
+                {
+                    onError: (error: any) => {
+                        Object.keys(error?.response?.data).forEach((field: any) => {
+                            setError(field, {
+                                type: "manual",
+                                message: error?.response?.data[field][0],
+                            });
+                        });
+                    },
+                }
+            );
+        } else {
+            createGallery({
+                variables: {
+                    input,
+                },
+            });
+        }
     }
 
 
@@ -70,7 +95,21 @@ const CreateOrUpdateGalleryForm = () => {
                 />
 
                 <Card className="w-full sm:w-8/12 md:w-2/3">
-                    <FileInput name="image" control={control} multiple={false} />
+                    <div className="border-dashed border-2 border-border-base h-36 rounded flex flex-col justify-center items-center cursor-pointer focus:border-accent-400 focus:outline-none"
+                        onClick={(e: any) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            openModal("FILE_MANAGER_VIEW", {
+                                files: files,
+                                setValue,
+                                getValues,
+                            });
+                        }} >
+                        <span className="text-accent font-semibold">
+                            {t("text-upload-highlight")}
+                        </span>{" "}
+                        {t("text-upload-message")} <br />
+                    </div>
                 </Card>
 
                 <Description
@@ -89,21 +128,26 @@ const CreateOrUpdateGalleryForm = () => {
                 </Card>
 
             </div>
+
             <div className="mb-4 text-end">
-                <Button> Create</Button>
+                {initialValues && (
+                    <Button
+                        variant="outline"
+                        onClick={router.back}
+                        className="me-4"
+                        type="button"
+                    >
+                        {t("form:button-label-back")}
+                    </Button>
+                )}
+                <Button loading={updating || creating}>
+                    {initialValues
+                        ? t("form:button-label-update-gallery")
+                        : t("form:button-label-add-gallery")}
+                </Button>
             </div>
         </form>
 
     )
 }
 export default CreateOrUpdateGalleryForm;
-// GalleryForm.authenticate = {
-//     permissions: adminOnly,
-// };
-// GalleryForm.Layout = Layout
-
-// export const getStaticProps = async ({ locale }: any) => ({
-//     props: {
-//         ...(await serverSideTranslations(locale, ["table", "common", "form"])),
-//     },
-// });

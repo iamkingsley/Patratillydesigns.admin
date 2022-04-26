@@ -41,6 +41,7 @@ import { useModalAction } from "@components/ui/modal/modal.context";
 import { CloseIcon } from "@components/icons/close-icon";
 import { isObject } from "lodash";
 import { useFilesQuery } from "@data/file-manager/use-files.query";
+import FileInput from "@components/ui/file-input";
 
 type Variation = {
   formName: number;
@@ -213,6 +214,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
   const { mutate: updateProduct, isLoading: updating } =
     useUpdateProductMutation();
   const onSubmit = async (values: FormValues) => {
+    console.log("values", values);
     const inputValues: any = {
       description: values.description,
       height: values.height,
@@ -372,7 +374,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
             </Card>
           </div>
 
-          {/* <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
+          <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
             <Description
               title={t("form:gallery-title")}
               details={t("form:gallery-help-text")}
@@ -382,7 +384,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
             <Card className="w-full sm:w-8/12 md:w-2/3">
               <FileInput name="gallery" control={control} />
             </Card>
-          </div> */}
+          </div>
 
           <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
             <Description

@@ -12,7 +12,7 @@ export default function CreateGalleryPage() {
                     {t("form:form-title-create-gallery")}
                 </h1>
             </div>
-            <CreateOrUpdateGalleryForm />
+            <CreateOrUpdateGalleryForm initialValues={''} />
         </>
     );
 }

@@ -44,6 +44,7 @@ export default function ProductsPage() {
     orderBy,
     sortedBy,
   });
+  console.log("product", data)
   if (loading) return <Loader text={t("common:text-loading")} />;
   if (error) return <ErrorMessage message={error.message} />;
 
@@ -79,17 +80,17 @@ export default function ProductsPage() {
               <ArrowDown className="ms-2" />
             )}
           </button>
-            <LinkButton
-                href={`${ROUTES.PRODUCTS}/create`}
-                className="h-12 md:ms-6 w-full md:w-auto"
-              >
-                <span className="block md:hidden xl:block">
-                  + {t("form:form-title-create-product")}
-                </span>
-                <span className="hidden md:block xl:hidden">
-                  + {t("form:button-label-add")}
-                </span>
-              </LinkButton>
+          <LinkButton
+            href={`${ROUTES.PRODUCTS}/create`}
+            className="h-12 md:ms-6 w-full md:w-auto"
+          >
+            <span className="block md:hidden xl:block">
+              + {t("form:form-title-create-product")}
+            </span>
+            <span className="hidden md:block xl:hidden">
+              + {t("form:button-label-add")}
+            </span>
+          </LinkButton>
         </div>
 
         <div

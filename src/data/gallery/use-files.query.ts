@@ -17,4 +17,5 @@ const useGalleryQuery = () => {
     });
 };
 
-export { useGalleryQuery, fetchGallery };
+// export { useGalleryQuery, fetchGallery };
+

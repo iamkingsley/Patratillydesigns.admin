@@ -1,5 +1,5 @@
 import { QueryParamsType, QueryOptionsType } from "@ts-types/custom.types";
-import { stringifySearchQuery } from "@utils/data-mappers";
+import { mapPaginatorData, stringifySearchQuery } from "@utils/data-mappers";
 import { useQuery } from "react-query";
 import { API_ENDPOINTS } from "@utils/api/endpoints";
 import gallery from "@repositories/gallery";
@@ -15,8 +15,12 @@ const fetchGalleries = async ({ queryKey }: any) => {
     name: text,
   });
   const url = `${API_ENDPOINTS.GALLERY}?search=${searchString}&orderBy=${orderBy}&sortedBy=${sortedBy}`;
-  const { data } = await gallery.all(url);
-  return { data };
+  // const { data } = await gallery.all(url);
+  // return { data };
+  const {
+    data: { data, ...rest },
+  } = await gallery.all(url);
+  return { gallery: { data, paginatorInfo: mapPaginatorData({ ...rest }) } };
 };
 
 const useGalleriesQuery = (options: QueryOptionsType = {}) => {
