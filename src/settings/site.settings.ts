@@ -119,12 +119,12 @@ export const siteSettings = {
       {
         href: ROUTES.FILE_MANAGER,
         label: "sidebar-nav-item-file-manager",
-        icon: "TypesIcon",
+        icon: "FileManagerIcon",
       },
       {
         href: ROUTES.GALLERY,
         label: "sidebar-nav-item-gallery",
-        icon: "WithdrawIcon",
+        icon: "GalleryIcon",
       },
     ],
     shop: [
