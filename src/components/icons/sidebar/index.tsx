@@ -16,3 +16,7 @@ export { ShippingsIcon } from "@components/icons/sidebar/shippings";
 export { WithdrawIcon } from "@components/icons/sidebar/withdraw";
 export { RefundsIcon } from "@components/icons/sidebar/refunds";
 export { TaxesIcon } from "@components/icons/sidebar/taxes";
+export { GalleryIcon } from "@components/icons/sidebar/gallery";
+export { FileManagerIcon } from "@components/icons/sidebar/file-manager";
+
+
